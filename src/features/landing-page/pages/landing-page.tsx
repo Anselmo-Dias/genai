@@ -26,12 +26,12 @@ export const LandingPage: FC = () => {
       <FloatingNavMini />
       <HeroSection />
       <ProblemSection />
+      <ArchitectureSection />
       <WhyItMattersSection />
       <PlatformSection />
       <HowItWorksSection />
       <UserInteractionSection />
       <CapabilitiesSection />
-      <ArchitectureSection />
       <GovernanceSection />
       <UseCasesSection />
       <CtaSection />
