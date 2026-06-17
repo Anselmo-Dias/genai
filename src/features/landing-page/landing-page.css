@@ -1,0 +1,205 @@
+/* Performance Optimized Animation Styles */
+
+/* Evita scroll horizontal causado por elementos full-bleed da landing */
+body { overflow-x: clip !important; }
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(5px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform, filter;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Keyframes with will-change and optimized properties */
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
+
+.animate-fade-slide-in {
+    will-change: opacity, transform, filter;
+    animation: fadeSlideIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Rest of keyframes unchanged but adding will-change where applicable in component classes */
+@keyframes bar-grow {
+    0% { transform: scaleY(0); opacity: 0; }
+    25% { transform: scaleY(1); opacity: 1; }
+    75% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(0); opacity: 0; }
+}
+
+@keyframes progress-loop {
+    0% { width: 0; opacity: 0.5; }
+    40% { width: var(--target-width); opacity: 1; }
+    80% { width: var(--target-width); opacity: 1; }
+    100% { width: var(--target-width); opacity: 0; }
+}
+
+@keyframes flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+
+@keyframes animationIn {
+    0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+
+@keyframes fadeInUpBlur {
+    0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes infinite-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes agentItemIn {
+    0%   { opacity: 0; transform: translateY(6px); filter: blur(2px); }
+    8%   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+    70%  { opacity: 1; transform: translateY(0);   filter: blur(0); }
+    82%  { opacity: 0; transform: translateY(-4px); filter: blur(2px); }
+    100% { opacity: 0; }
+}
+
+@keyframes chunkAppear {
+    0%   { opacity: 0; transform: scaleX(0.92); }
+    10%  { opacity: 1; transform: scaleX(1); }
+    60%  { opacity: 1; }
+    75%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes frameUp {
+    0%   { transform: translateY(30px); opacity: 0; }
+    18%  { transform: translateY(0);    opacity: 1; }
+    78%  { transform: translateY(0);    opacity: 1; }
+    100% { transform: translateY(30px); opacity: 0; }
+}
+
+@keyframes stepFadeUp {
+    0%, 20% { transform: translateY(10px); opacity: 0; }
+    35%     { transform: translateY(0);    opacity: 1; }
+    78%     { transform: translateY(0);    opacity: 1; }
+    100%    { transform: translateY(10px); opacity: 0; }
+}
+
+@keyframes countUp {
+    0%   { --num: 0;   opacity: 0; transform: translateY(10px);  filter: blur(4px); }
+    15%  {             opacity: 1; transform: translateY(0);      filter: blur(0); }
+    35%  { --num: 127; }
+    85%  { --num: 127; opacity: 1; transform: translateY(0);      filter: blur(0); }
+    100% { --num: 140; opacity: 0; transform: translateY(-10px);  filter: blur(4px); }
+}
+
+@keyframes barCycle {
+    0%   { transform: scaleY(0);    opacity: 0; }
+    15%  { transform: scaleY(1.05); opacity: 1; }
+    25%  { transform: scaleY(1);    opacity: 1; }
+    85%  { transform: scaleY(1);    opacity: 1; }
+    100% { transform: scaleY(0);    opacity: 0; }
+}
+
+.landing-page-body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050505;
+    color: #d4d4d4; /* text-neutral-300 */
+}
+
+.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+
+.electric-card { 
+    box-shadow: 0 0 30px rgba(249,115,22,0.3), inset 0 0 20px rgba(249,115,22,0.1);
+    will-change: box-shadow;
+}
+
+.border-gradient { position: relative; }
+.border-gradient::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    border-radius: inherit; 
+    padding: 1px; 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
+    -webkit-mask-composite: xor; 
+    mask-composite: exclude; 
+    background: linear-gradient(225deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); 
+    pointer-events: none; 
+}
+
+.animate-flow { animation: flow 1s linear infinite; }
+@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-orbit { animation: orbit-spin 60s linear infinite; will-change: transform; }
+.animate-orbit-reverse { animation: orbit-spin 60s linear infinite reverse; will-change: transform; }
+.animate-entry { 
+    animation: fadeInUpBlur 1s cubic-bezier(0.2,0.8,0.2,1) both;
+    will-change: opacity, transform, filter;
+}
+.animate-infinite-scroll { 
+    animation: infinite-scroll 30s linear infinite; 
+    will-change: transform;
+}
+
+.animate-agent-item { 
+    animation: agentItemIn 7s cubic-bezier(0.4,0,0.2,1) infinite both;
+    will-change: opacity, transform, filter;
+}
+.animate-chunk { 
+    animation: chunkAppear 6s cubic-bezier(0.4,0,0.2,1) infinite both;
+    will-change: opacity, transform;
+}
+
+.animate-metric-count {
+    animation: countUp 6s cubic-bezier(0.22,1,0.36,1) infinite; 
+    counter-reset: num var(--num);
+    will-change: opacity, transform, filter;
+}
+.animate-metric-count::after { content: "+" counter(num) "%"; }
+.animate-bar-loop { 
+    animation: barCycle 6s cubic-bezier(0.22,1,0.36,1) infinite; 
+    transform-origin: bottom; 
+    will-change: transform, opacity; 
+}
+
+@property --num {
+    syntax: '<integer>';
+    initial-value: 0;
+    inherits: false;
+}
+
+/* Custom components classes */
+.feature-btn.feat-active {
+    background: linear-gradient(to right, #f97316, #f59e0b);
+    box-shadow: 0 0 30px -10px rgba(249,115,22,0.5);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+[style*="--border-gradient"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: var(--border-radius-before, inherit);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: var(--border-gradient);
+    pointer-events: none;
+}
