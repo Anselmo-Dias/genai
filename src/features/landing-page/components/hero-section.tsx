@@ -42,11 +42,17 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 0.6, ease: EASE_OUT }}
             className="max-w-md space-y-8 text-left"
           >
-            <p className="leading-relaxed md:text-base text-sm font-light text-neutral-300 tracking-normal font-sans">
-              Crie, configure e opere agentes inteligentes com múltiplos
-              provedores de IA, RAG, MCP e observabilidade completa — tudo em
-              uma única plataforma corporativa.
-            </p>
+            <div className="space-y-4">
+              <p className="text-sm md:text-base font-medium leading-snug text-white font-sans">
+                A adoção de IA em empresas não falha por falta de modelos —
+                falha por falta de controle.
+              </p>
+              <p className="leading-relaxed md:text-base text-sm font-light text-neutral-300 tracking-normal font-sans">
+                Crie e governe agentes conectados nativamente ao Connect, NEO e
+                Front — com contexto real, rastreabilidade completa e controle
+                centralizado.
+              </p>
+            </div>
 
             {/* CTA único — link sublinhado com underline animado e seta */}
             <a
@@ -70,7 +76,7 @@ export function HeroSection() {
             className="flex flex-col gap-y-1 leading-[0.95] md:text-[4rem] lg:text-[5rem] cursor-default text-3xl font-semibold tracking-tighter font-manrope text-left md:text-right"
           >
             <span className="inline-block leading-[0.95] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/60">
-              Orquestre agentes de IA com governança, controle e escala
+              A camada de inteligência do seu ecossistema mobileX
             </span>
           </motion.h1>
         </div>

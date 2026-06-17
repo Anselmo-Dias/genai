@@ -284,8 +284,9 @@ export function UserInteractionSection() {
             Como os usuários interagem com os agentes
           </h2>
           <p className="mb-8 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 font-sans">
-            Os agentes são disponibilizados em uma interface conversacional
-            corporativa, simples de usar e preparada para o dia a dia da empresa.
+            Os agentes respondem com base no conhecimento da sua empresa (RAG),
+            citam as fontes e registram cada interação para auditoria — em uma
+            interface conversacional pronta para o dia a dia corporativo.
           </p>
           <div className="flex flex-col gap-3">
             {FEATURES.map((feature) => (
@@ -309,9 +310,10 @@ export function UserInteractionSection() {
               Como os usuários interagem com os agentes
             </h2>
             <p className="mb-10 max-w-lg text-base leading-relaxed text-neutral-600 dark:text-neutral-400 font-sans">
-              Os agentes são disponibilizados em uma interface conversacional
-              corporativa, simples de usar e preparada para o dia a dia da
-              empresa.
+              Os agentes respondem com base no conhecimento da sua empresa
+              (RAG), citam as fontes e registram cada interação para auditoria —
+              em uma interface conversacional pronta para o dia a dia
+              corporativo.
             </p>
 
             <div className="relative z-10 flex w-full max-w-md flex-col gap-3">

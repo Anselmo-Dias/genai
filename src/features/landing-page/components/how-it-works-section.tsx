@@ -19,9 +19,9 @@ type Step = {
 const STEPS: Step[] = [
   {
     number: "01",
-    title: "Definição das políticas corporativas",
+    title: "Defina as políticas de uso",
     description:
-      "Definição das políticas corporativas de uso dos agentes por usuário, agentes e plataformas.",
+      "Estabeleça quem pode usar quais agentes, com limites de uso, auditoria e conformidade definidos por usuário e por plataforma.",
   },
   {
     number: "02",
@@ -33,16 +33,10 @@ const STEPS: Step[] = [
     number: "03",
     title: "Crie agentes e defina permissões",
     description:
-      "Configure agentes com modelo, instruções, parâmetros e controle granular de quem pode acessar, usar e modificar cada agente.",
+      "Configure agentes com modelo, instruções e parâmetros, e controle de forma granular quem pode acessar, usar e modificar cada um.",
   },
   {
     number: "04",
-    title: "Defina políticas de uso",
-    description:
-      "Estabeleça diretrizes claras sobre como os agentes devem ser utilizados, incluindo limites de uso, auditoria e conformidade.",
-  },
-  {
-    number: "05",
     title: "Conecte tools e servidores MCP",
     description:
       "Registre ferramentas externas, APIs e servidores MCP para que os agentes possam executar ações em sistemas reais com segurança.",
@@ -55,7 +49,7 @@ type Detail = {
 }
 
 const FINAL_STEP = {
-  number: "06",
+  number: "05",
   kicker: "Observabilidade em tempo real",
   title: "Monitore uso, custo e desempenho",
   details: [

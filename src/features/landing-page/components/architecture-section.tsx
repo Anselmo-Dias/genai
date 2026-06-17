@@ -71,7 +71,7 @@ const FEATURES: Feature[] = [
     icon: Lock,
     title: "Governança rigorosa",
     description:
-      "Segurança de dados garantida com operação coesa que transcende a interface conversacional isolada.",
+      "Controle e segurança de dados em todas as interações entre o GenAI e os componentes do ecossistema, sem integrações manuais.",
   },
 ]
 
@@ -189,9 +189,9 @@ export function ArchitectureSection() {
                 que cada agente possua contexto pleno e rastreabilidade absoluta.
               </p>
               <p className="text-sm leading-relaxed text-neutral-500 font-sans">
-                Ao centralizar as interações com o ecossistema mobileX,
-                asseguramos governança rigorosa, segurança de dados e uma operação
-                coesa que transcende a interface conversacional isolada.
+                Seus agentes já sabem o que acontece no Connect, no NEO e no
+                Front — sem integração manual. O contexto que antes exigia
+                desenvolvimento fica disponível nativamente.
               </p>
             </div>
 

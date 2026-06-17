@@ -134,7 +134,7 @@ const FEATURES: SecurityFeature[] = [
   },
   {
     icon: Monitor,
-    title: "Isolamento por cliente",
+    title: "Seus dados ficam seus",
     description:
       "Arquitetura multi-tenant com segregação completa de dados, agentes e configurações entre diferentes clientes e ambientes.",
   },
