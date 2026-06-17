@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 import {
+  AlertTriangle,
   Boxes,
   Briefcase,
   Home,
@@ -17,6 +18,39 @@ import { useScrollSpy } from "../hooks/use-scroll-spy"
 
 /** Animação de reflow (FLIP) usada quando o rail morfa de lateral → topo. */
 const LAYOUT_TRANSITION = { type: "spring", stiffness: 320, damping: 34 } as const
+
+/**
+ * Surgimento do rail (pílula das bolinhas): orquestra os filhos em cascata,
+ * fazendo as bolinhas "caírem" de cima para baixo, construindo o rail.
+ */
+const railPillVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.09, delayChildren: 0.08 },
+  },
+} as const
+
+/** Cada bolinha entra caindo de cima, dando a sensação de construção. */
+const railItemVariants = {
+  hidden: { opacity: 0, y: -16, scale: 0.3 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 520, damping: 24 },
+  },
+} as const
+
+/** Toggle de tema dá o "plup" final, depois de todas as bolinhas. */
+const railToggleVariants = {
+  hidden: { opacity: 0, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", stiffness: 650, damping: 13, delay: 0.7 },
+  },
+} as const
 
 /**
  * Faixa de viewport em que o rail lateral atrapalha o conteúdo central.
@@ -37,6 +71,7 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "inicio", icon: Home, label: "Início" },
+  { id: "problema", icon: AlertTriangle, label: "O problema que resolvemos" },
   { id: "plataforma", icon: Boxes, label: "Plataforma" },
   { id: "como-funciona", icon: Workflow, label: "Como funciona" },
   { id: "capacidades", icon: Layers, label: "Capacidades" },
@@ -86,6 +121,9 @@ export function FloatingNav() {
   const isLight = theme === "light"
   const docked = useDockedHeader()
 
+  // No desktop, o rail fica oculto enquanto a seção hero ("inicio") está ativa.
+  const hiddenOnHero = activeId === "inicio"
+
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
     id: string,
@@ -115,27 +153,36 @@ export function FloatingNav() {
           : "bottom-0 left-6 top-0 flex-col justify-center",
       )}
     >
-      <motion.aside
-        layout
-        transition={LAYOUT_TRANSITION}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className={cn(
-          "pointer-events-auto flex items-center gap-3",
-          docked ? "flex-row" : "flex-col",
-        )}
-      >
-        <motion.div
-          layout
-          transition={LAYOUT_TRANSITION}
-          className={cn(pillBase, docked ? "flex-row" : "flex-col items-center")}
-        >
+      <AnimatePresence>
+        {!hiddenOnHero && (
+          <motion.aside
+            key="rail"
+            layout
+            transition={LAYOUT_TRANSITION}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+            className={cn(
+              "pointer-events-auto flex items-center gap-3",
+              docked ? "flex-row" : "flex-col",
+            )}
+          >
+            <motion.div
+              layout
+              variants={railPillVariants}
+              transition={LAYOUT_TRANSITION}
+              className={cn(
+                pillBase,
+                docked ? "flex-row" : "flex-col items-center",
+              )}
+            >
           {NAV_ITEMS.map((item) => {
             const isActive = activeId === item.id
             return (
               <motion.a
                 key={item.id}
                 layout
+                variants={railItemVariants}
                 transition={LAYOUT_TRANSITION}
                 href={`#${item.id}`}
                 onClick={(event) => handleClick(event, item.id)}
@@ -172,7 +219,12 @@ export function FloatingNav() {
         </motion.div>
 
         {/* Toggle de tema — bolinha separada (abaixo no modo lateral, ao lado no header) */}
-        <motion.div layout transition={LAYOUT_TRANSITION} className={pillBase}>
+        <motion.div
+          layout
+          variants={railToggleVariants}
+          transition={LAYOUT_TRANSITION}
+          className={pillBase}
+        >
           <button
             type="button"
             aria-label="Alternar tema claro/escuro"
@@ -194,7 +246,9 @@ export function FloatingNav() {
             </span>
           </button>
         </motion.div>
-      </motion.aside>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
