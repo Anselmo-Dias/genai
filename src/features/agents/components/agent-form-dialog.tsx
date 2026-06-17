@@ -126,7 +126,7 @@ const agentFormSchema = z.object({
   rawPrompt: z.string(),
   promptSections: z.array(promptSectionSchema),
   inheritTtl: z.boolean(),
-  retentionDays: z.coerce
+  retentionDays: z
     .number()
     .int()
     .min(1, "Mínimo 1 dia")

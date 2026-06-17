@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { Separator } from "@/components/ui/separator";
+import type { ReactNode } from "react";
 
 interface SettingsSectionProps {
   title: string;
