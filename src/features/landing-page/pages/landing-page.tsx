@@ -32,7 +32,7 @@ export const LandingPage: FC = () => {
       <UseCasesSection />
       <CtaSection />
       <Footer />
-      <ChatLauncher />
+      {/* <ChatLauncher /> */}
     </div>
   )
 };

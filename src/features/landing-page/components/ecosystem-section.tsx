@@ -49,13 +49,13 @@ export function EcosystemSection() {
         transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
         className="flex flex-col gap-6 mb-12"
       >
-        <span className="uppercase text-sm font-medium text-neutral-500 tracking-widest">
+        <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
           Integração nativa com o ecossistema mobileX
         </span>
         <div>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4">
             Os agentes consomem e também são{" "}
-            <span className="text-[#532971]">oferecidos como serviço</span>.
+            <span className="text-[#FF720A]">oferecidos como serviço</span>.
           </h2>
           <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-gray-400 max-w-2xl">
             O GenAI conversa nativamente com os demais componentes mobileX nos

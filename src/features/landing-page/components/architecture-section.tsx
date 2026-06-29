@@ -1,5 +1,5 @@
 import { motion } from "motion/react"
-import { ShieldCheck } from "lucide-react"
+import { ArrowDown, ArrowUp, ShieldCheck } from "lucide-react"
 
 import { SectionContainer } from "./section-container"
 
@@ -43,11 +43,17 @@ const BOTTOM_CARDS = [
 function FlowLine({ label }: { label: string }) {
   return (
     <div className="flex items-center justify-center gap-3 py-4 text-xs font-semibold text-neutral-400">
-      <span className="text-[#8a5fb0]">▲▼</span>
+      <div className="flex items-center text-[#8a5fb0]">
+        <ArrowUp className="w-3 h-3" />
+        <ArrowDown className="w-3 h-3" />
+      </div>
       <span className="rounded-full border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-zinc-900 px-3 py-1">
         {label}
       </span>
-      <span className="text-[#8a5fb0]">▲▼</span>
+      <div className="flex items-center text-[#8a5fb0]">
+        <ArrowUp className="w-3 h-3" />
+        <ArrowDown className="w-3 h-3" />
+      </div>
     </div>
   )
 }
@@ -64,13 +70,13 @@ export function ArchitectureSection() {
         transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
         className="flex flex-col gap-6 mb-12"
       >
-        <span className="uppercase text-sm font-medium text-neutral-500 tracking-widest">
+        <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
           Como funciona
         </span>
         <div>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4">
             O GenAI no centro da sua{" "}
-            <span className="text-[#532971]">operação de IA</span>.
+            <span className="text-[#FF720A]">operação de IA</span>.
           </h2>
           <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-gray-400 max-w-2xl">
             Você configura seus agentes em um só lugar. O GenAI orquestra esses

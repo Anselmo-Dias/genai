@@ -59,12 +59,12 @@ export function UseCasesSection() {
         transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
         className="flex flex-col gap-6 mb-12"
       >
-        <span className="uppercase text-sm font-medium text-neutral-500 tracking-widest">
+        <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
           Casos de uso
         </span>
         <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope">
           O que sua organização faz{" "}
-          <span className="text-[#532971]">com o GenAI</span>.
+          <span className="text-[#FF720A]">com o GenAI</span>.
         </h2>
       </motion.div>
 
@@ -80,7 +80,7 @@ export function UseCasesSection() {
             className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 transition-all duration-300 hover:border-[#8a5fb0] hover:shadow-[0_10px_30px_-18px_rgba(83,41,113,0.45)]"
           >
             <h3 className="flex items-center gap-3 text-base font-semibold text-neutral-900 dark:text-white mb-3 tracking-tight">
-              <span className="grid place-items-center w-8 h-8 flex-none rounded-lg bg-[#532971]/10 text-[#532971] dark:text-[#8a5fb0] text-xs font-bold">
+              <span className="grid place-items-center w-8 h-8 flex-none rounded-lg bg-[#532971]/10 text-[#532971] dark:bg-[#FF720A]/10 dark:text-[#FF720A] text-xs font-bold">
                 {item.number}
               </span>
               {item.title}

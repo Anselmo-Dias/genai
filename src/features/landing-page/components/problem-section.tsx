@@ -50,7 +50,7 @@ export function ProblemSection() {
             transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
             className="flex gap-3 items-center"
           >
-            <span className="uppercase text-sm font-medium text-neutral-500 tracking-widest">
+            <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
               O conceito
             </span>
           </motion.div>
@@ -64,7 +64,7 @@ export function ProblemSection() {
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4">
               Usar IA de forma séria é gerenciar{" "}
-              <span className="text-[#F97316]">muitos agentes</span> — não
+              <span className="text-[#FF720A]">muitos agentes</span> — não
               apenas um.
             </h2>
             <p className="leading-relaxed text-lg font-light text-neutral-600 dark:text-gray-400 max-w-xl">

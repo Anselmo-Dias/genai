@@ -40,13 +40,8 @@ export function HeroSection() {
               mobileX GenAI
             </span>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] font-manrope">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/60">
-                O lugar onde sua organização{" "}
-              </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white/90 via-white/70 to-white/40">
-                gerencia todos os agentes de IA.
-              </span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] font-manrope text-white">
+              O lugar onde sua organização gerencia todos os agentes de IA.
             </h1>
 
             <p className="text-sm md:text-base leading-relaxed text-neutral-300 max-w-xl">
