@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import {
-  AlertTriangle,
-  Boxes,
   Briefcase,
   Home,
   Layers,
+  Lightbulb,
   Moon,
+  Plug,
+  ShieldCheck,
   Sun,
   Workflow,
 } from "lucide-react"
@@ -71,10 +72,11 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "inicio", icon: Home, label: "Início" },
-  { id: "problema", icon: AlertTriangle, label: "O problema que resolvemos" },
-  { id: "plataforma", icon: Boxes, label: "Plataforma" },
-  { id: "como-funciona", icon: Workflow, label: "Como funciona" },
-  { id: "capacidades", icon: Layers, label: "Capacidades" },
+  { id: "conceito", icon: Lightbulb, label: "O conceito" },
+  { id: "arquitetura", icon: Workflow, label: "Como funciona" },
+  { id: "identidade", icon: ShieldCheck, label: "Identidade do usuário" },
+  { id: "ecossistema", icon: Plug, label: "Integração" },
+  { id: "funcionalidades", icon: Layers, label: "Funcionalidades" },
   { id: "casos", icon: Briefcase, label: "Casos de uso" },
 ]
 

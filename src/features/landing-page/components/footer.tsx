@@ -39,20 +39,20 @@ type LinkGroup = {
 
 const LINK_GROUPS: LinkGroup[] = [
   {
-    title: "Plataforma",
+    title: "Produto",
     links: [
-      { label: "Plataforma", href: "#plataforma" },
-      { label: "Como funciona", href: "#como-funciona" },
-      { label: "Capacidades", href: "#capacidades" },
-      { label: "Casos de uso", href: "#casos" },
+      { label: "O conceito", href: "#conceito" },
+      { label: "Como funciona", href: "#arquitetura" },
+      { label: "Identidade do usuário", href: "#identidade" },
+      { label: "Integração", href: "#ecossistema" },
     ],
   },
   {
     title: "Recursos",
     links: [
-      { label: "Arquitetura mobileX", href: "#arquitetura" },
-      { label: "Governança e segurança", href: "#seguranca" },
-      { label: "Documentação", href: "#" },
+      { label: "Funcionalidades", href: "#funcionalidades" },
+      { label: "Casos de uso", href: "#casos" },
+      { label: "Agendar demonstração", href: "#demo" },
     ],
   },
 ]
@@ -95,8 +95,8 @@ export function Footer() {
               </span>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-              Plataforma corporativa para criar, governar e operar agentes de IA
-              com rastreabilidade total.
+              A camada de IA corporativa do ecossistema mobileX — uma plataforma
+              da MTM Tecnologia.
             </p>
           </div>
 
@@ -156,7 +156,7 @@ export function Footer() {
 
         {/* Linha inferior */}
         <div className="flex flex-col items-center justify-between gap-4 pt-8 text-sm text-neutral-400 dark:text-neutral-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} MTM Tecnologia. Todos os direitos reservados.</p>
+          <p>A camada de IA corporativa do ecossistema mobileX — uma plataforma da MTM Tecnologia.</p>
           <div className="flex gap-4">
             <a
               href="https://br.linkedin.com/company/mtm-tecnologia"

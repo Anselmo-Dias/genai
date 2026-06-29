@@ -1,6 +1,5 @@
-import type { LucideIcon } from "lucide-react"
 import { motion } from "motion/react"
-import { Database, Cpu, Smartphone, Shield, Eye, Lock } from "lucide-react"
+import { ShieldCheck } from "lucide-react"
 
 import { SectionContainer } from "./section-container"
 
@@ -11,142 +10,44 @@ const fadeSlideIn = {
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 } as const
 
-type Component = {
-  name: string
-  label: string
-}
-
-const COMPONENTS: Component[] = [
-  { name: "Connect", label: "Componente mobileX" },
-  { name: "NEO", label: "Componente mobileX" },
-  { name: "Front mobileX", label: "Componente mobileX" },
-]
-
-type OrbitItem = {
-  name: string
-  icon: LucideIcon
-  transform: string
-}
-
-const ORBIT_ITEMS: OrbitItem[] = [
+const CONSUMERS = [
   {
-    name: "Connect",
-    icon: Database,
-    transform: "translate(-50%, -50%) rotate(0deg) translateY(-170px) rotate(0deg)",
+    title: "Usuários finais",
+    sub: "Pessoas da operação e clientes",
+    via: "Acesso via Chat — com login",
   },
   {
-    name: "NEO",
-    icon: Cpu,
-    transform:
-      "translate(-50%, -50%) rotate(120deg) translateY(-170px) rotate(-120deg)",
-  },
-  {
-    name: "Front mobileX",
-    icon: Smartphone,
-    transform:
-      "translate(-50%, -50%) rotate(240deg) translateY(-170px) rotate(-240deg)",
+    title: "Aplicações e sistemas",
+    sub: "Apps, automações e outros sistemas",
+    via: "Acesso via API — identidade repassada",
   },
 ]
 
-type Feature = {
-  icon: LucideIcon
-  title: string
-  description: string
-}
-
-const FEATURES: Feature[] = [
-  {
-    icon: Shield,
-    title: "Contexto pleno",
-    description:
-      "Cada agente possui visibilidade completa sobre dados e ações do ecossistema mobileX via protocolo MCP.",
-  },
-  {
-    icon: Eye,
-    title: "Rastreabilidade absoluta",
-    description:
-      "Auditoria completa de todas as interações entre o GenAI e os componentes Connect, NEO e Front mobileX.",
-  },
-  {
-    icon: Lock,
-    title: "Governança rigorosa",
-    description:
-      "Controle e segurança de dados em todas as interações entre o GenAI e os componentes do ecossistema, sem integrações manuais.",
-  },
+const TOOLS = [
+  { title: "Connect", sub: "Integrações e conectores" },
+  { title: "NEO", sub: "Dados e workflows" },
+  { title: "Front", sub: "Apps e portais" },
+  { title: "Sistemas externos", sub: "CRM, ERP, bases atuais" },
 ]
 
-function ComponentList() {
+const HUB_PILLS = ["Configuração de agentes", "Governança por identidade", "Multi-provedor de LLM"]
+
+const BOTTOM_CARDS = [
+  { title: "Configura", description: "Todos os agentes criados, ajustados e versionados em um só painel." },
+  { title: "Orquestra", description: "Orquestração agêntica centralizada, com o modelo e as regras de cada agente." },
+  { title: "Conecta", description: "Consome ferramentas, dados e serviços via servidores MCP." },
+  { title: "Entrega", description: "Disponibiliza os agentes por chat (pessoas) e por API (aplicações)." },
+]
+
+
+function FlowLine({ label }: { label: string }) {
   return (
-    <div className="relative z-10 flex flex-col gap-3">
-      {COMPONENTS.map((component) => (
-        <div
-          key={component.name}
-          className="group relative flex cursor-default items-center gap-3 rounded-xl border border-black/10 bg-black/[0.02] p-3 transition-all duration-300 hover:border-orange-500/20 hover:bg-orange-500/5 dark:border-white/5 dark:bg-white/[0.03]"
-        >
-          <div className="hidden h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-black/10 bg-black/[0.04] transition-colors group-hover:border-orange-500/30 dark:border-white/10 dark:bg-white/5 md:flex">
-            <div className="h-3 w-3 rounded-sm bg-black/30 transition-colors group-hover:bg-orange-400 dark:bg-white/30" />
-          </div>
-          <div>
-            <div className="text-sm font-medium text-neutral-900 dark:text-white font-sans">
-              {component.name}
-            </div>
-            <div className="text-xs text-neutral-500 font-sans">
-              {component.label}
-            </div>
-          </div>
-          <div className="absolute right-3 top-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e] md:static md:right-auto md:top-auto md:ml-auto" />
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function Orbit() {
-  return (
-    <div className="group/orbit relative flex min-h-[450px] items-center justify-center overflow-hidden rounded-3xl border border-black/10 bg-neutral-50 dark:border-white/10 dark:bg-[#0A0A0A]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(249,115,22,0.15)_0%,_rgba(0,0,0,0)_70%)] opacity-80" />
-
-      <div className="relative flex h-full w-full scale-[0.65] items-center justify-center transition-transform duration-500 md:scale-100">
-        {/* Anéis concêntricos */}
-        <div className="pointer-events-none absolute flex items-center justify-center opacity-20">
-          <div className="h-[180px] w-[180px] rounded-full border border-orange-500/30" />
-        </div>
-        <div className="pointer-events-none absolute flex items-center justify-center opacity-20">
-          <div className="h-[340px] w-[340px] rounded-full border border-orange-500/20" />
-        </div>
-        <div className="pointer-events-none absolute flex items-center justify-center opacity-10">
-          <div className="h-[500px] w-[500px] rounded-full border border-orange-500/10" />
-        </div>
-
-        {/* Hub central */}
-        <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full border border-orange-500/50 bg-[#120a05] shadow-[0_0_50px_-5px_rgba(249,115,22,0.5)]">
-          <div className="absolute inset-0 animate-ping rounded-full border border-orange-500 opacity-20" />
-          <span className="text-sm font-medium text-white font-sans">GenAI</span>
-        </div>
-
-        {/* Anel orbital */}
-        <div className="animate-orbit absolute inset-0 flex items-center justify-center">
-          {ORBIT_ITEMS.map((item) => {
-            const Icon = item.icon
-            return (
-              <div
-                key={item.name}
-                className="absolute left-1/2 top-1/2 z-10"
-                style={{ transform: item.transform }}
-              >
-                <div className="animate-orbit-reverse flex flex-col items-center gap-2">
-                  <div className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-xl border border-black/10 bg-white text-neutral-500 shadow-lg transition-all hover:scale-110 hover:border-orange-500/30 hover:bg-orange-500/5 hover:text-orange-500 dark:border-white/10 dark:bg-black dark:text-neutral-400 dark:hover:text-white">
-                    <Icon size={22} strokeWidth={1.5} />
-                  </div>
-                  <span className="whitespace-nowrap font-mono text-[10px] font-medium text-neutral-500 dark:text-neutral-400">
-                    {item.name}
-                  </span>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
+    <div className="flex items-center justify-center gap-3 py-4 text-xs font-semibold text-neutral-400">
+      <span className="text-[#8a5fb0]">▲▼</span>
+      <span className="rounded-full border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-zinc-900 px-3 py-1">
+        {label}
+      </span>
+      <span className="text-[#8a5fb0]">▲▼</span>
     </div>
   )
 }
@@ -154,76 +55,118 @@ function Orbit() {
 export function ArchitectureSection() {
   return (
     <SectionContainer id="arquitetura" className="mt-32 mb-0">
+      {/* Header */}
       <motion.div
         variants={fadeSlideIn}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.8, delay: 0.1, ease: EASE_OUT }}
-        className="border-gradient relative rounded-3xl bg-gradient-to-tr from-transparent via-black/[0.04] to-transparent p-8 backdrop-blur dark:via-white/[0.05] lg:p-10"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
+        className="flex flex-col gap-6 mb-12"
       >
-        {/* Header */}
-        <div className="mb-0 flex items-center justify-between">
-          <div className="flex flex-col gap-3 text-left">
-            <h2 className="text-4xl font-light tracking-tight text-neutral-900 dark:text-white font-bricolage md:text-5xl">
-              Arquitetura integrada mobileX
-            </h2>
-            <p className="max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 font-sans">
-              O GenAI atua como um hub central, conectando-se nativamente aos
-              componentes Connect, NEO e Front mobileX através do protocolo
-              universal MCP (Model Context Protocol), unificando inteligência,
-              dados e ações.
+        <span className="uppercase text-sm font-medium text-neutral-500 tracking-widest">
+          Como funciona
+        </span>
+        <div>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4">
+            O GenAI no centro da sua{" "}
+            <span className="text-[#532971]">operação de IA</span>.
+          </h2>
+          <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-gray-400 max-w-2xl">
+            Você configura seus agentes em um só lugar. O GenAI orquestra esses
+            agentes de forma centralizada, conecta-se às suas ferramentas e
+            dados, e os entrega para quem precisa — pessoas e sistemas.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Diagrama */}
+      <motion.div
+        variants={fadeSlideIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1, delay: 0.3, ease: EASE_OUT }}
+        className="rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/20 p-6 lg:p-10"
+      >
+        {/* Camada: consumidores */}
+        <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.1em] text-neutral-400">
+          Quem usa os agentes
+        </p>
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+          {CONSUMERS.map((node) => (
+            <div key={node.title} className="rounded-xl border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-zinc-900 p-4 text-center">
+              <p className="text-sm font-semibold text-neutral-900 dark:text-white">{node.title}</p>
+              <p className="mt-0.5 text-xs text-neutral-500">{node.sub}</p>
+              <span className="mt-2 inline-block rounded-full bg-[#532971]/10 px-2.5 py-0.5 text-[10px] font-bold text-[#532971] dark:text-[#8a5fb0]">
+                {node.via}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <FlowLine label="Chat e API — pedido e resposta" />
+
+        {/* Hub central */}
+        <div className="mx-auto max-w-lg rounded-2xl bg-[#532971] px-8 py-6 text-center shadow-[0_18px_40px_-18px_rgba(83,41,113,0.7)]">
+          <p className="text-xl font-bold text-white tracking-tight">mobileX GenAI</p>
+          <p className="mt-1 text-sm text-white/75">Orquestração central de agentes</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {HUB_PILLS.map((pill) => (
+              <span
+                key={pill}
+                className="rounded-full bg-white/[0.14] px-3 py-1 text-xs font-semibold text-white"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <FlowLine label="via MCP — consome dados e serviços / disponibiliza agentes" />
+
+        {/* Camada: ferramentas */}
+        <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.1em] text-neutral-400">
+          Ferramentas, dados e serviços
+        </p>
+        <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 lg:grid-cols-4">
+          {TOOLS.map((node) => (
+            <div key={node.title} className="rounded-xl border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-zinc-900 p-4 text-center">
+              <p className="text-sm font-semibold text-neutral-900 dark:text-white">{node.title}</p>
+              <p className="mt-0.5 text-xs text-neutral-500">{node.sub}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Trilha de identidade */}
+        <div className="relative z-10 mt-8 flex items-center justify-center gap-2 rounded-xl border border-dashed border-[#8a5fb0]/60 bg-[#532971]/5 px-4 py-3 text-sm font-semibold text-[#532971] dark:text-[#8a5fb0]">
+          <ShieldCheck className="w-4 h-4 shrink-0" />
+          A identidade do usuário é preservada em todas as camadas — do chat ou da API até cada acesso a dados.
+        </div>
+      </motion.div>
+
+      {/* 4 cards inferiores */}
+      <motion.div
+        variants={fadeSlideIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }}
+        className="mt-5 grid grid-cols-1 gap-[22px] sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {BOTTOM_CARDS.map((card) => (
+          <div
+            key={card.title}
+            className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 transition-all duration-300 hover:border-[#8a5fb0] hover:shadow-[0_10px_30px_-18px_rgba(83,41,113,0.45)]"
+          >
+            <h3 className="mb-2 text-base font-semibold tracking-tight text-neutral-900 dark:text-white">
+              {card.title}
+            </h3>
+            <p className="text-sm leading-relaxed text-neutral-600 dark:text-zinc-400">
+              {card.description}
             </p>
           </div>
-        </div>
-
-        {/* Grid principal */}
-        <div className="mt-12 mb-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* Card esquerdo */}
-          <div className="group/card relative flex flex-col justify-between overflow-hidden rounded-3xl border border-black/10 bg-white p-8 transition-colors duration-500 hover:border-black/20 dark:border-white/10 dark:bg-[#0A0A0A] dark:hover:border-white/20 md:p-10">
-            <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-orange-500/10 opacity-50 blur-[100px] transition-opacity duration-500 group-hover/card:opacity-100" />
-
-            <div className="relative z-10 mb-8">
-              <p className="mb-4 mt-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-sans">
-                Essa arquitetura hub-and-spoke, operada via servidor MCP, garante
-                que cada agente possua contexto pleno e rastreabilidade absoluta.
-              </p>
-              <p className="text-sm leading-relaxed text-neutral-500 font-sans">
-                Seus agentes já sabem o que acontece no Connect, no NEO e no
-                Front — sem integração manual. O contexto que antes exigia
-                desenvolvimento fica disponível nativamente.
-              </p>
-            </div>
-
-            <ComponentList />
-          </div>
-
-          {/* Card direito: órbita */}
-          <Orbit />
-        </div>
-
-        {/* Bottom features */}
-        <div className="grid grid-cols-1 gap-12 border-t border-black/10 pt-12 dark:border-white/5 md:grid-cols-3">
-          {FEATURES.map((feature) => {
-            const Icon = feature.icon
-            return (
-              <div key={feature.title} className="group flex flex-col items-start">
-                <div className="mb-6 h-px w-8 bg-neutral-400 transition-colors duration-300 group-hover:bg-orange-500 dark:bg-neutral-700" />
-                <Icon
-                  className="mb-5 text-neutral-500 transition-colors duration-300 group-hover:text-orange-500 dark:text-neutral-400"
-                  size={24}
-                  strokeWidth={1.5}
-                />
-                <h3 className="mb-3 text-xl text-neutral-900 dark:text-white font-sans">
-                  {feature.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-neutral-600 transition-colors group-hover:text-neutral-800 dark:text-neutral-400 dark:group-hover:text-neutral-300 font-sans">
-                  {feature.description}
-                </p>
-              </div>
-            )
-          })}
-        </div>
+        ))}
       </motion.div>
     </SectionContainer>
   )

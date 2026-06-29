@@ -6,13 +6,11 @@ import { HeroSection } from "../components/hero-section"
 import { FloatingNav } from "../components/floating-nav"
 import { FloatingNavMini } from "../components/floating-nav-mini"
 import { ProblemSection } from "../components/problem-section"
-import { WhyItMattersSection } from "../components/why-it-matters-section"
-import { PlatformSection } from "../components/platform-section"
-import { HowItWorksSection } from "../components/how-it-works-section"
-import { UserInteractionSection } from "../components/user-interaction-section"
-import { CapabilitiesSection } from "../components/capabilities-section"
+import { CentralQuestionSection } from "../components/central-question-section"
 import { ArchitectureSection } from "../components/architecture-section"
-import { GovernanceSection } from "../components/governance-section"
+import { IdentitySection } from "../components/identity-section"
+import { EcosystemSection } from "../components/ecosystem-section"
+import { FeaturesSection } from "../components/features-section"
 import { UseCasesSection } from "../components/use-cases-section"
 import { CtaSection } from "../components/cta-section"
 import { Footer } from "../components/footer"
@@ -26,13 +24,11 @@ export const LandingPage: FC = () => {
       <FloatingNavMini />
       <HeroSection />
       <ProblemSection />
+      <CentralQuestionSection />
       <ArchitectureSection />
-      <WhyItMattersSection />
-      <PlatformSection />
-      <HowItWorksSection />
-      <UserInteractionSection />
-      <CapabilitiesSection />
-      <GovernanceSection />
+      <IdentitySection />
+      <EcosystemSection />
+      <FeaturesSection />
       <UseCasesSection />
       <CtaSection />
       <Footer />

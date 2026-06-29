@@ -1,5 +1,4 @@
 import { motion } from "motion/react"
-import { ArrowRight } from "lucide-react"
 
 import heroBg from "@/assets/hero-bg.jpeg"
 import heroBgMobile from "@/assets/hero-bg-mobile.jpeg"
@@ -16,69 +15,62 @@ export function HeroSection() {
       {/* Background image — versão mobile abaixo de md, desktop acima */}
       <div className="absolute inset-0 -z-10">
         <picture>
-          {/* mobile (< md) */}
           <source media="(max-width: 767px)" srcSet={heroBgMobile} />
-          {/* tablet 4:3 (md até < xl) */}
           <source media="(max-width: 1279px)" srcSet={heroBg43} />
-          {/* desktop wide (>= xl) */}
           <img
             src={heroBg}
             alt=""
             className="absolute inset-0 w-full h-full object-cover brightness-[0.65]"
           />
         </picture>
-        {/* Overlay na faixa inferior: escurece a base onde o texto fica nos
-            dois cantos, deixando o topo/centro da imagem (logo) mais visíveis */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
-      {/* Hero Content — distribuído nos dois cantos inferiores */}
-      <div className="flex-1 flex flex-col px-6 lg:px-12 mt-12 mb-16 lg:mb-20 relative z-10 justify-end">
-        <div className="w-full max-w-[1400px] mx-auto flex flex-col-reverse md:flex-row justify-between items-end gap-12">
-          {/* Canto inferior-esquerdo: subtexto + CTA sublinhado */}
+      {/* Hero Content — centralizado verticalmente, alinhado à esquerda */}
+      <div className="flex-1 flex flex-col px-6 lg:px-12 relative z-10 justify-center">
+        <div className="w-full max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.6, ease: EASE_OUT }}
-            className="max-w-md space-y-8 text-left"
+            transition={{ duration: 1, delay: 0.3, ease: EASE_OUT }}
+            className="text-left space-y-6 max-w-3xl"
           >
-            <div className="space-y-4">
-              <p className="text-sm md:text-base font-medium leading-snug text-white font-sans">
-                A adoção de IA em empresas não falha por falta de modelos —
-                falha por falta de controle.
-              </p>
-              <p className="leading-relaxed md:text-base text-sm font-light text-neutral-300 tracking-normal font-sans">
-                Crie e governe agentes conectados nativamente ao Connect, NEO e
-                Front — com contexto real, rastreabilidade completa e controle
-                centralizado.
-              </p>
-            </div>
-
-            {/* CTA único — link sublinhado com underline animado e seta */}
-            <a
-              href="#"
-              className="group relative inline-flex items-center gap-2 pb-2 text-xs font-bold uppercase tracking-widest text-white cursor-pointer"
-            >
-              Agendar demonstração
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              {/* underline base */}
-              <span className="absolute bottom-0 left-0 h-px w-full bg-white/25" />
-              {/* underline animado (laranja) que entra a partir da esquerda */}
-              <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-[#F97316] transition-transform duration-300 group-hover:scale-x-100" />
-            </a>
-          </motion.div>
-
-          {/* Canto inferior-direito: título */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }}
-            className="flex flex-col gap-y-1 leading-[0.95] md:text-[4rem] lg:text-[5rem] cursor-default text-3xl font-semibold tracking-tighter font-manrope text-left md:text-right"
-          >
-            <span className="inline-block leading-[0.95] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/60">
-              A camada de inteligência do seu ecossistema mobileX
+            <span className="inline-block text-xs font-bold tracking-[0.12em] uppercase text-[#FF720A]">
+              mobileX GenAI
             </span>
-          </motion.h1>
+
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] font-manrope">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/60">
+                O lugar onde sua organização{" "}
+              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white/90 via-white/70 to-white/40">
+                gerencia todos os agentes de IA.
+              </span>
+            </h1>
+
+            <p className="text-sm md:text-base leading-relaxed text-neutral-300 max-w-xl">
+              Quando a IA entra de verdade na operação, surgem vários agentes —
+              para diferentes áreas, pessoas e sistemas. O GenAI é a plataforma
+              central para criar, orquestrar e governar todos eles, em um só
+              lugar.
+            </p>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a
+                href="#demo"
+                className="inline-flex items-center gap-2 bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-sm px-5 py-3 rounded-full transition-colors duration-200"
+              >
+                Agendar demonstração
+              </a>
+              <a
+                href="#conceito"
+                className="inline-flex items-center gap-2 border border-white/30 hover:border-white/60 text-white font-semibold text-sm px-5 py-3 rounded-full transition-colors duration-200 backdrop-blur-sm"
+              >
+                Entenda o conceito
+              </a>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

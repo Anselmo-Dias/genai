@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { FreeMode } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/free-mode"
-import { Boxes, Briefcase, Home, Layers, Moon, Sun, Workflow } from "lucide-react"
+import { Briefcase, Home, Layers, Lightbulb, Moon, Plug, ShieldCheck, Sun, Workflow } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -38,9 +38,11 @@ type NavItem = {
 /** Mesmas seções do rail desktop (FloatingNav), em formato compacto. */
 const NAV_ITEMS: NavItem[] = [
   { id: "inicio", icon: Home, label: "Início" },
-  { id: "plataforma", icon: Boxes, label: "Plataforma" },
-  { id: "como-funciona", icon: Workflow, label: "Como funciona" },
-  { id: "capacidades", icon: Layers, label: "Capacidades" },
+  { id: "conceito", icon: Lightbulb, label: "O conceito" },
+  { id: "arquitetura", icon: Workflow, label: "Como funciona" },
+  { id: "identidade", icon: ShieldCheck, label: "Identidade" },
+  { id: "ecossistema", icon: Plug, label: "Integração" },
+  { id: "funcionalidades", icon: Layers, label: "Funcionalidades" },
   { id: "casos", icon: Briefcase, label: "Casos de uso" },
 ]
 
