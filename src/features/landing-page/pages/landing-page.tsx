@@ -14,7 +14,7 @@ import { FeaturesSection } from "../components/features-section"
 import { UseCasesSection } from "../components/use-cases-section"
 import { CtaSection } from "../components/cta-section"
 import { Footer } from "../components/footer"
-import { ChatLauncher } from "@/features/chat/components/chat-launcher"
+// import { ChatLauncher } from "@/features/chat/components/chat-launcher"
 
 export const LandingPage: FC = () => {
   return (
