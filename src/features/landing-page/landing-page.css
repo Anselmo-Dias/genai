@@ -3,6 +3,16 @@
 /* Evita scroll horizontal causado por elementos full-bleed da landing */
 body { overflow-x: clip !important; }
 
+/*
+ * Altura do header. Token estrutural único usado pela navbar (altura fixa),
+ * pela folga superior do conteúdo e pelo ponto de início das linhas verticais
+ * estruturais. Assim a linha inferior do header e as verticais partem
+ * exatamente do mesmo ponto, formando uma estrutura contínua.
+ */
+:root {
+    --header-height: 5.5rem;
+}
+
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
@@ -117,14 +127,29 @@ body { overflow-x: clip !important; }
 }
 
 .landing-page-body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter Tight', sans-serif;
     background-color: #050505;
     color: #d4d4d4; /* text-neutral-300 */
 }
 
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
 
-.electric-card { 
+/*
+ * Textura de grade sutil usada atrás da imagem da hero (inspirada no efeito da
+ * referência: pattern + blob desfocado). A cor vem de `currentColor`, então o
+ * tema é controlado pela classe de texto (text-black/… ou dark:text-white/…).
+ * Esmaece nas bordas via máscara radial.
+ */
+.hero-grid-fx {
+    background-image:
+        linear-gradient(to right, currentColor 1px, transparent 1px),
+        linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
+    mask-image: radial-gradient(closest-side, #000, transparent);
+}
+
+.electric-card {
     box-shadow: 0 0 30px rgba(249,115,22,0.3), inset 0 0 20px rgba(249,115,22,0.1);
     will-change: box-shadow;
 }
@@ -202,4 +227,37 @@ body { overflow-x: clip !important; }
     mask-composite: exclude;
     background: var(--border-gradient);
     pointer-events: none;
+}
+
+@keyframes text-shimmer {
+    0% { background-position: 160% 0; }
+    100% { background-position: -60% 0; }
+}
+
+.animate-text-shimmer {
+    background-color: #FF720A;
+    background-image: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.75) 50%,
+        transparent 65%
+    );
+    background-size: 200% auto;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-shimmer 2.5s ease-in-out infinite;
+    will-change: background-position;
+}
+
+.section-header-content {
+    max-width: 800px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

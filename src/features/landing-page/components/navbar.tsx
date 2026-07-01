@@ -32,26 +32,26 @@ export function Navbar() {
       initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.8, ease: EASE_OUT }}
-      className="absolute top-0 inset-x-0 w-full px-6 py-6 lg:px-12 z-50"
+      className="absolute top-0 inset-x-0 w-full h-[var(--header-height)] px-6 lg:px-12 z-50"
     >
-      <div className="w-full max-w-[1400px] mx-auto flex justify-between items-center">
+      <div className="w-full h-full max-w-[1400px] mx-auto flex justify-between items-center lg:px-10">
         {/* Marca (esquerda) */}
         <a
           href="#inicio"
           onClick={(event) => handleNavClick(event, "#inicio")}
-          className="flex items-center gap-3 text-white hover:text-[#F97316] transition-colors"
+          className="flex items-center gap-3 text-neutral-900 dark:text-white hover:text-[#F97316] transition-colors"
         >
           <span className="font-medium text-lg tracking-tight">mobileX GenAI</span>
         </a>
 
         {/* Links + CTA + toggle (direita) */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wide text-neutral-300">
+        <div className="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wide text-neutral-600 dark:text-neutral-300">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(event) => handleNavClick(event, link.href)}
-              className="hover:text-white transition-colors"
+              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               {link.label}
             </a>
@@ -75,7 +75,7 @@ export function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/15 text-neutral-300 hover:text-[#F97316] hover:border-white/40 transition-colors"
+            className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 dark:border-white/15 text-neutral-600 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 transition-colors"
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -90,7 +90,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[#050505]/95 backdrop-blur-md border-t border-white/10 overflow-hidden"
+            className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#050505]/95 backdrop-blur-md border-t border-black/10 dark:border-white/10 overflow-hidden"
           >
             <div className="px-6 py-4 max-w-[1400px] mx-auto w-full flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
@@ -101,7 +101,7 @@ export function Navbar() {
                     handleNavClick(event, link.href)
                     setIsMenuOpen(false)
                   }}
-                  className="block py-3 text-base font-medium text-neutral-300 hover:text-[#F97316] transition-colors"
+                  className="block py-3 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-[#F97316] transition-colors"
                 >
                   {link.label}
                 </a>

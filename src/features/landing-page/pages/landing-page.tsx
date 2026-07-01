@@ -2,6 +2,7 @@ import type { FC } from "react"
 
 import "../landing-page.css"
 import { Navbar } from "../components/navbar"
+import { PageGridLines } from "../components/page-grid-lines"
 import { HeroSection } from "../components/hero-section"
 import { FloatingNav } from "../components/floating-nav"
 import { FloatingNavMini } from "../components/floating-nav-mini"
@@ -20,6 +21,7 @@ export const LandingPage: FC = () => {
   return (
     <div className="text-neutral-300 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#F97316] selection:text-black relative">
       <Navbar />
+      <PageGridLines />
       <FloatingNav />
       <FloatingNavMini />
       <HeroSection />
