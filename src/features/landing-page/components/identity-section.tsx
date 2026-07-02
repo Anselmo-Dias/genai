@@ -142,7 +142,7 @@ export function IdentitySection() {
           </div>
 
           {/* Secure token badge */}
-          <div className="mt-5 relative z-10 flex items-center gap-2 rounded-xl border border-dashed border-[#8a5fb0]/60 bg-[#532971]/5 px-4 py-2.5 text-xs font-semibold text-[#532971] dark:text-[#8a5fb0]">
+          <div className="mt-5 relative z-10 flex items-center gap-2 rounded-xl border border-dashed border-[#8a5fb0]/60 bg-[#532971]/5 px-4 py-2.5 text-xs font-semibold text-[#532971] dark:text-[#a370d6]">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Sessão corporativa mapeada via JWT e protegida por segregação de acesso multi-tenant.</span>
           </div>

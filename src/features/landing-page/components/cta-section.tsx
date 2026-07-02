@@ -1,9 +1,12 @@
 import { SectionContainer } from "./section-container"
+import { useScheduleDemo } from "./schedule-demo-dialog"
 
 export function CtaSection() {
+  const { open: openScheduleDemo } = useScheduleDemo()
+
   return (
-    <SectionContainer id="demo" className="mt-32 mb-24">
-      <div className="rounded-[26px] bg-gradient-to-br from-[#3f1f57] to-[#532971] px-10 py-16 text-center">
+    <SectionContainer id="demo" className="mt-32 mb-24" divider={false}>
+      <div className="rounded-[26px] bg-gradient-to-br from-[#3f1f57] to-[#532971] dark:from-[#532971] dark:to-[#6c3a93] px-10 py-16 text-center">
         <h2 className="mx-auto max-w-[22ch] text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
           Um só lugar para criar, orquestrar e{" "}
           <span className="relative inline-flex items-center">
@@ -30,12 +33,13 @@ export function CtaSection() {
           seus agentes, com o seu controle e o seu modelo — entregues a pessoas
           e a sistemas, com identidade e auditoria em tudo.
         </p>
-        <a
-          href="#"
+        <button
+          type="button"
+          onClick={openScheduleDemo}
           className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors duration-200"
         >
           Agendar demonstração
-        </a>
+        </button>
       </div>
     </SectionContainer>
   )

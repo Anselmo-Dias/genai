@@ -149,6 +149,16 @@ body { overflow-x: clip !important; }
     mask-image: radial-gradient(closest-side, #000, transparent);
 }
 
+/*
+ * Hachura diagonal dos espaçadores entre seções (padrão da referência):
+ * linhas de 1px a 45° repetindo a cada 14px. A cor vem de `currentColor`,
+ * então o tema é controlado pela classe de texto (text-black/10 dark:text-white/10),
+ * como no .hero-grid-fx.
+ */
+.bg-stripes {
+    background-image: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 14px);
+}
+
 .electric-card {
     box-shadow: 0 0 30px rgba(249,115,22,0.3), inset 0 0 20px rgba(249,115,22,0.1);
     will-change: box-shadow;

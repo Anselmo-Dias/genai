@@ -3,7 +3,7 @@ import { SectionContainer } from "./section-container"
 const CARDS = [
   {
     role: "Como consumidor",
-    roleStyle: "bg-[#532971]/10 text-[#532971] dark:text-[#8a5fb0]",
+    roleStyle: "bg-[#532971]/10 text-[#532971] dark:text-[#a370d6]",
     title: "Os agentes usam o que já existe",
     description: (
       <>

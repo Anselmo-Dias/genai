@@ -1,6 +1,7 @@
 import { Mail, ShieldCheck } from "lucide-react"
 
 import logoMobileX from "@/assets/mobileX.png"
+import { useScheduleDemo } from "./schedule-demo-dialog"
 
 // lucide-react não fornece ícones de marca; usamos SVGs inline.
 function LinkedInIcon({ className }: { className?: string }) {
@@ -50,6 +51,8 @@ const LINK_GROUPS: LinkGroup[] = [
 ]
 
 export function Footer() {
+  const { open: openScheduleDemo } = useScheduleDemo()
+
   // Rolagem suave para âncoras reais (#secao); placeholders ("#") ficam inertes.
   const handleAnchorClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -102,13 +105,23 @@ export function Footer() {
               <ul className="space-y-4 text-sm">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      onClick={(event) => handleAnchorClick(event, link.href)}
-                      className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-                    >
-                      {link.label}
-                    </a>
+                    {link.href === "#demo" ? (
+                      <button
+                        type="button"
+                        onClick={openScheduleDemo}
+                        className="text-left text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={(event) => handleAnchorClick(event, link.href)}
+                        className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

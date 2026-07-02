@@ -43,10 +43,12 @@ const BORDER_CLASSES = [
 
 export function ProblemSection() {
   return (
-    <SectionContainer id="conceito" className="mt-32 mb-0">
+    // Espaçamentos verticais como na referência: compactos no mobile
+    // (py-8 → tablet:py-16) e generosos só no desktop.
+    <SectionContainer id="conceito" className="mt-16 md:mt-24 lg:mt-32 mb-0">
       {/* Header */}
-      <div className="relative w-full mb-16">
-        <div className="section-header-content gap-6 mb-12">
+      <div className="relative w-full mb-12 md:mb-16">
+        <div className="section-header-content gap-6 mb-8 md:mb-12">
           <div className="flex gap-3 items-center">
             <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
               O conceito
@@ -59,7 +61,7 @@ export function ProblemSection() {
               <span className="text-[#FF720A]">muitos agentes</span> — não
               apenas um.
             </h2>
-            <p className="text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-xl">
+            <p className="text-base md:text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-xl">
               Toda adoção de IA mais estruturada precisa de uma infraestrutura
               para administrar os vários agentes que passam a existir na
               operação. Sem ela, cada agente vira uma ilha, com seu próprio
@@ -81,7 +83,7 @@ export function ProblemSection() {
               <div
                 key={step.number}
                 className={cn(
-                  "group relative p-8 hover:bg-neutral-50/50 dark:hover:bg-zinc-900/10 transition-all duration-500 flex flex-col h-full",
+                  "group relative p-6 md:p-8 hover:bg-neutral-50/50 dark:hover:bg-zinc-900/10 transition-all duration-500 flex flex-col h-full",
                   BORDER_CLASSES[index]
                 )}
               >

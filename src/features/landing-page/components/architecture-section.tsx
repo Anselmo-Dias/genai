@@ -40,7 +40,7 @@ export function ArchitectureSection() {
           Como funciona
         </span>
         <div>
-          <h2 className="text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4 leading-[120%]">
+          <h2 className="max-w-xl text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4 leading-[120%]">
             O GenAI no centro da sua{" "}
             <span className="text-[#FF720A]">operação de IA</span>.
           </h2>
@@ -77,7 +77,7 @@ export function ArchitectureSection() {
                       <p className="text-sm font-semibold text-neutral-900 dark:text-white leading-tight">{node.title}</p>
                       <p className="text-xs text-neutral-500 leading-normal mt-0.5">{node.sub}</p>
                     </div>
-                    <span className="rounded-full bg-[#532971]/10 dark:bg-[#532971]/20 px-2.5 py-0.5 text-[10px] font-bold text-[#532971] dark:text-[#8a5fb0]">
+                    <span className="rounded-full bg-[#532971]/10 dark:bg-[#532971]/20 px-2.5 py-0.5 text-[10px] font-bold text-[#532971] dark:text-[#a370d6]">
                       {node.via}
                     </span>
                   </div>
@@ -122,7 +122,7 @@ export function ArchitectureSection() {
           <div className="opacity-80 absolute top-0 right-0 bottom-0 left-0 bg-[radial-gradient(circle_at_center,_rgba(255,114,10,0.06)_0%,_rgba(0,0,0,0)_70%)] pointer-events-none" />
 
           {/* Trilha de identidade inside the visual area */}
-          <div className="relative z-10 flex items-center gap-2 rounded-xl border border-dashed border-[#8a5fb0]/60 bg-[#532971]/5 px-4 py-3 text-xs md:text-sm font-semibold text-[#532971] dark:text-[#8a5fb0]">
+          <div className="relative z-10 flex items-center gap-2 rounded-xl border border-dashed border-[#8a5fb0]/60 bg-[#532971]/5 px-4 py-3 text-xs md:text-sm font-semibold text-[#532971] dark:text-[#a370d6]">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>A identidade do usuário é preservada em todas as camadas — do chat ou da API até cada acesso a dados.</span>
           </div>
@@ -135,7 +135,7 @@ export function ArchitectureSection() {
             <div className="absolute w-[380px] h-[380px] rounded-full border border-black/5 dark:border-white/5 pointer-events-none" />
             
             {/* Central glowing hub */}
-            <div className="relative w-28 h-28 rounded-full bg-[#532971] border border-[#FF720A]/30 dark:border-[#FF720A]/50 flex flex-col items-center justify-center shadow-[0_0_40px_-5px_rgba(83,41,113,0.6)] dark:shadow-[0_0_50px_-5px_rgba(83,41,113,0.8)] z-20 text-center">
+            <div className="relative w-28 h-28 rounded-full bg-[#532971] dark:bg-[#6c3a93] border border-[#FF720A]/30 dark:border-[#FF720A]/50 flex flex-col items-center justify-center shadow-[0_0_40px_-5px_rgba(83,41,113,0.6)] dark:shadow-[0_0_50px_-5px_rgba(108,58,147,0.8)] z-20 text-center">
               <div className="animate-ping opacity-10 border-[#FF720A] border rounded-full absolute inset-0 pointer-events-none" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#FF720A]">mobileX</span>
               <span className="text-lg font-extrabold text-white leading-none mt-0.5">GenAI</span>
