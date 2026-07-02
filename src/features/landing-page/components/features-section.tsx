@@ -1,13 +1,4 @@
-import { motion } from "motion/react"
-
 import { SectionContainer } from "./section-container"
-
-const EASE_OUT = [0.2, 0.8, 0.2, 1] as const
-
-const fadeSlideIn = {
-  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-} as const
 
 const FEATURES = [
   {
@@ -28,7 +19,7 @@ const FEATURES = [
   {
     title: "Ferramentas e ações via MCP",
     description:
-      "Os agentes executam ações em sistemas reais, conectando-se a servidores internos e externos.",
+      "Os agentes executam ações in loco em sistemas reais, conectando-se a servidores internos e externos.",
   },
   {
     title: "Histórico e auditoria completos",
@@ -60,42 +51,30 @@ const FEATURES = [
 export function FeaturesSection() {
   return (
     <SectionContainer id="funcionalidades" className="mt-32 mb-0">
-      <motion.div
-        variants={fadeSlideIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
-        className="flex flex-col gap-6 mb-12"
-      >
+      <div className="section-header-content gap-6 mb-12">
         <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
           Funcionalidades
         </span>
-        <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope">
+        <h2 className="text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope leading-[120%]">
           Tudo que sua equipe precisa para operar IA{" "}
           <span className="text-[#FF720A]">com controle</span>.
         </h2>
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[22px]">
-        {FEATURES.map((feature, index) => (
-          <motion.div
+        {FEATURES.map((feature) => (
+          <div
             key={feature.title}
-            variants={fadeSlideIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, delay: 0.1 + index * 0.05, ease: EASE_OUT }}
             className="group rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 transition-all duration-300 hover:border-[#8a5fb0] hover:shadow-[0_10px_30px_-18px_rgba(83,41,113,0.45)]"
           >
-            <h3 className="flex items-start gap-2.5 text-base font-semibold text-neutral-900 dark:text-white mb-2 tracking-tight">
+            <h3 className="flex items-start gap-2.5 text-xl font-semibold leading-[102%] tracking-[-0.4px] text-neutral-900 dark:text-white mb-2">
               <span className="mt-[7px] flex-none w-2 h-2 rounded-sm bg-[#532971] dark:bg-[#FF720A]" />
               {feature.title}
             </h3>
-            <p className="text-sm text-neutral-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-sm font-medium leading-[180%] tracking-[0.7px] text-neutral-600 dark:text-zinc-400">
               {feature.description}
             </p>
-          </motion.div>
+          </div>
         ))}
       </div>
     </SectionContainer>

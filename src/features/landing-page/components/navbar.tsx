@@ -1,12 +1,16 @@
 import { useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
-import { Menu, X } from "lucide-react"
+import { Menu, Moon, Sun, X } from "lucide-react"
 
+import { useTheme } from "@/components/theme-provider"
+import { useScheduleDemo } from "./schedule-demo-dialog"
+
+// Apenas os links essenciais da narrativa (o que é → como funciona → o que
+// oferece). Os subtemas (identidade, integração, casos de uso) continuam
+// acessíveis pelo scroll e pelo FloatingNav.
 const NAV_LINKS = [
   { label: "O conceito", href: "#conceito" },
   { label: "Como funciona", href: "#arquitetura" },
-  { label: "Identidade", href: "#identidade" },
-  { label: "Integração", href: "#ecossistema" },
   { label: "Funcionalidades", href: "#funcionalidades" },
 ]
 
@@ -14,6 +18,7 @@ const EASE_OUT = [0.2, 0.8, 0.2, 1] as const
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { open: openScheduleDemo } = useScheduleDemo()
 
   // Rolagem suave apenas para links com âncora real (#secao); placeholders ("#") são ignorados.
   const handleNavClick = (
@@ -32,50 +37,57 @@ export function Navbar() {
       initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.8, ease: EASE_OUT }}
-      className="absolute top-0 inset-x-0 w-full px-6 py-6 lg:px-12 z-50"
+      className="absolute top-0 inset-x-0 w-full h-[var(--header-height)] px-6 lg:px-12 z-50"
     >
-      <div className="w-full max-w-[1400px] mx-auto flex justify-between items-center">
+      <div className="relative w-full h-full max-w-[1400px] mx-auto flex justify-between items-center lg:px-10">
         {/* Marca (esquerda) */}
         <a
           href="#inicio"
           onClick={(event) => handleNavClick(event, "#inicio")}
-          className="flex items-center gap-3 text-white hover:text-[#F97316] transition-colors"
+          className="flex items-center gap-3 text-neutral-900 dark:text-white hover:text-[#F97316] transition-colors"
         >
           <span className="font-medium text-lg tracking-tight">mobileX GenAI</span>
         </a>
 
-        {/* Links + CTA + toggle (direita) */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wide text-neutral-300">
+        {/*
+          Links centralizados (desktop) — absolutos em relação ao frame, para o
+          centro ser o da página e não o do espaço que sobra entre marca e CTA.
+        */}
+        <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-xs font-medium uppercase tracking-wide text-neutral-600 dark:text-neutral-300">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(event) => handleNavClick(event, link.href)}
-              className="hover:text-white transition-colors"
+              className="hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               {link.label}
             </a>
           ))}
-
-          <a
-            href="#demo"
-            onClick={(event) => handleNavClick(event, "#demo")}
-            className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200 normal-case tracking-normal"
-          >
-            Agendar demonstração
-          </a>
-
         </div>
 
-        {/* Mobile: hambúrguer */}
-        <div className="flex md:hidden items-center gap-4">
+        {/* CTA + toggle de tema (direita, desktop) */}
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={openScheduleDemo}
+            className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200"
+          >
+            Agendar demonstração
+          </button>
+        </div>
+
+        {/* Mobile: toggle de tema + hambúrguer */}
+        <div className="flex md:hidden items-center gap-3">
+          <ThemeToggle />
           <button
             type="button"
             aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/15 text-neutral-300 hover:text-[#F97316] hover:border-white/40 transition-colors"
+            className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 dark:border-white/15 text-neutral-600 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 transition-colors"
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -90,7 +102,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[#050505]/95 backdrop-blur-md border-t border-white/10 overflow-hidden"
+            className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#050505]/95 backdrop-blur-md border-t border-black/10 dark:border-white/10 overflow-hidden"
           >
             <div className="px-6 py-4 max-w-[1400px] mx-auto w-full flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
@@ -101,27 +113,47 @@ export function Navbar() {
                     handleNavClick(event, link.href)
                     setIsMenuOpen(false)
                   }}
-                  className="block py-3 text-base font-medium text-neutral-300 hover:text-[#F97316] transition-colors"
+                  className="block py-3 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-[#F97316] transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
               <div className="pt-3 pb-1">
-                <a
-                  href="#demo"
-                  onClick={(event) => {
-                    handleNavClick(event, "#demo")
+                <button
+                  type="button"
+                  onClick={() => {
                     setIsMenuOpen(false)
+                    openScheduleDemo()
                   }}
                   className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-sm px-5 py-3 rounded-full transition-colors duration-200"
                 >
                   Agendar demonstração
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.nav>
+  )
+}
+
+/**
+ * Toggle de tema claro/escuro — mesma lógica do rail flutuante (FloatingNav),
+ * no formato dos botões redondos da navbar.
+ */
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const isLight = theme === "light"
+
+  return (
+    <button
+      type="button"
+      aria-label="Alternar tema claro/escuro"
+      onClick={() => setTheme(isLight ? "dark" : "light")}
+      className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 dark:border-white/15 text-neutral-600 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 transition-colors"
+    >
+      {isLight ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+    </button>
   )
 }

@@ -1,9 +1,7 @@
-import { motion } from "motion/react"
 import { Mail, ShieldCheck } from "lucide-react"
 
 import logoMobileX from "@/assets/mobileX.png"
-
-const EASE_OUT = [0.2, 0.8, 0.2, 1] as const
+import { useScheduleDemo } from "./schedule-demo-dialog"
 
 // lucide-react não fornece ícones de marca; usamos SVGs inline.
 function LinkedInIcon({ className }: { className?: string }) {
@@ -21,11 +19,6 @@ function InstagramIcon({ className }: { className?: string }) {
     </svg>
   )
 }
-
-const fadeSlideIn = {
-  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-} as const
 
 type FooterLink = {
   label: string
@@ -58,6 +51,8 @@ const LINK_GROUPS: LinkGroup[] = [
 ]
 
 export function Footer() {
+  const { open: openScheduleDemo } = useScheduleDemo()
+
   // Rolagem suave para âncoras reais (#secao); placeholders ("#") ficam inertes.
   const handleAnchorClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -71,15 +66,16 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full rounded-t-3xl bg-neutral-100 px-6 pb-10 pt-20 text-neutral-600 dark:bg-black dark:text-neutral-400 lg:px-12">
-      <motion.div
-        variants={fadeSlideIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: EASE_OUT }}
-        className="mx-auto w-full max-w-[1400px]"
-      >
+    <footer className="relative w-full rounded-t-3xl bg-neutral-100 px-6 pb-10 pt-20 text-neutral-600 dark:bg-black dark:text-neutral-400 lg:rounded-t-none lg:px-12">
+      {/*
+        Trilho superior do footer — full-bleed, de extremidade a extremidade,
+        com a mesma espessura/cor/opacidade do trilho do header. Só em lg+, como
+        as demais linhas estruturais; nesse breakpoint o topo do footer fica
+        reto (lg:rounded-t-none) para a linha tocar as bordas sem cantos.
+      */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-px bg-black/10 lg:block dark:bg-white/10" />
+
+      <div className="mx-auto w-full max-w-[1400px] lg:px-10">
         {/* Grid principal */}
         <div className="grid grid-cols-1 gap-12 border-b border-neutral-200 pb-16 dark:border-neutral-800 md:grid-cols-4">
           {/* Marca */}
@@ -109,13 +105,23 @@ export function Footer() {
               <ul className="space-y-4 text-sm">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      onClick={(event) => handleAnchorClick(event, link.href)}
-                      className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-                    >
-                      {link.label}
-                    </a>
+                    {link.href === "#demo" ? (
+                      <button
+                        type="button"
+                        onClick={openScheduleDemo}
+                        className="text-left text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={(event) => handleAnchorClick(event, link.href)}
+                        className="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -178,7 +184,7 @@ export function Footer() {
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </footer>
   )
 }

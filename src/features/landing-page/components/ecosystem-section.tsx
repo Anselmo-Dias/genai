@@ -1,18 +1,9 @@
-import { motion } from "motion/react"
-
 import { SectionContainer } from "./section-container"
-
-const EASE_OUT = [0.2, 0.8, 0.2, 1] as const
-
-const fadeSlideIn = {
-  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-} as const
 
 const CARDS = [
   {
     role: "Como consumidor",
-    roleStyle: "bg-[#532971]/10 text-[#532971] dark:text-[#8a5fb0]",
+    roleStyle: "bg-[#532971]/10 text-[#532971] dark:text-[#a370d6]",
     title: "Os agentes usam o que já existe",
     description: (
       <>
@@ -41,37 +32,23 @@ const CARDS = [
 export function EcosystemSection() {
   return (
     <SectionContainer id="ecossistema" className="mt-32 mb-0">
-      <motion.div
-        variants={fadeSlideIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1, delay: 0.2, ease: EASE_OUT }}
-        className="flex flex-col gap-6 mb-12"
-      >
+      <div className="section-header-content gap-6 mb-12">
         <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
           Integração nativa com o ecossistema mobileX
         </span>
         <div>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4">
+          <h2 className="text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4 leading-[120%]">
             Os agentes consomem e também são{" "}
             <span className="text-[#FF720A]">oferecidos como serviço</span>.
           </h2>
-          <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-gray-400 max-w-2xl">
+          <p className="text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-2xl">
             O GenAI conversa nativamente com os demais componentes mobileX nos
             dois sentidos — sem integração manual a cada novo caso.
           </p>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        variants={fadeSlideIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1, delay: 0.4, ease: EASE_OUT }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-[22px]"
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[22px]">
         {CARDS.map((card) => (
           <div
             key={card.title}
@@ -80,27 +57,20 @@ export function EcosystemSection() {
             <span className={`inline-block mb-4 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${card.roleStyle}`}>
               {card.role}
             </span>
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3 tracking-tight">
+            <h3 className="text-xl font-semibold leading-[102%] tracking-[-0.4px] text-neutral-900 dark:text-white mb-3">
               {card.title}
             </h3>
-            <p className="text-sm text-neutral-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-sm font-medium leading-[180%] tracking-[0.7px] text-neutral-600 dark:text-zinc-400">
               {card.description}
             </p>
           </div>
         ))}
-      </motion.div>
+      </div>
 
-      <motion.p
-        variants={fadeSlideIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1, delay: 0.5, ease: EASE_OUT }}
-        className="mt-8 text-lg font-light leading-relaxed text-neutral-600 dark:text-gray-400 max-w-2xl"
-      >
+      <p className="mt-8 text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-2xl">
         E quando você precisar de mais — um novo app, uma nova integração, mais
         dados — tudo está no mesmo ecossistema, pronto. Você define o ritmo.
-      </motion.p>
+      </p>
     </SectionContainer>
   )
 }
