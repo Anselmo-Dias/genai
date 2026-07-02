@@ -1,8 +1,7 @@
 import { useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
-import { Menu, Moon, Sun, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
-import { useTheme } from "@/components/theme-provider"
 import { useScheduleDemo } from "./schedule-demo-dialog"
 
 // Apenas os links essenciais da narrativa (o que é → como funciona → o que
@@ -66,21 +65,17 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* CTA + toggle de tema (direita, desktop) */}
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={openScheduleDemo}
-            className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200"
-          >
-            Agendar demonstração
-          </button>
-        </div>
+        {/* CTA (direita, desktop) */}
+        <button
+          type="button"
+          onClick={openScheduleDemo}
+          className="hidden md:inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200"
+        >
+          Agendar demonstração
+        </button>
 
-        {/* Mobile: toggle de tema + hambúrguer */}
+        {/* Mobile: hambúrguer */}
         <div className="flex md:hidden items-center gap-3">
-          <ThemeToggle />
           <button
             type="button"
             aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
@@ -135,25 +130,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
-
-/**
- * Toggle de tema claro/escuro — mesma lógica do rail flutuante (FloatingNav),
- * no formato dos botões redondos da navbar.
- */
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const isLight = theme === "light"
-
-  return (
-    <button
-      type="button"
-      aria-label="Alternar tema claro/escuro"
-      onClick={() => setTheme(isLight ? "dark" : "light")}
-      className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 dark:border-white/15 text-neutral-600 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 transition-colors"
-    >
-      {isLight ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-    </button>
   )
 }

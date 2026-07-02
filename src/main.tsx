@@ -6,7 +6,9 @@ import './index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    {/* storageKey nova ("-light") descarta a preferência dark que ficou salva
+        no navegador antes de o toggle de tema ser removido da landing. */}
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme-light">
       <LandingPage />
     </ThemeProvider>
   </StrictMode>,
