@@ -271,3 +271,28 @@ body { overflow-x: clip !important; }
     flex-direction: column;
     align-items: flex-start;
 }
+
+@keyframes flow-dash {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+.animate-flow-dash {
+    stroke-dasharray: 6 6;
+    animation: flow-dash 1.5s linear infinite;
+}
+
+@keyframes conveyor-scroll {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate-conveyor {
+    display: flex;
+    animation: conveyor-scroll 25s linear infinite;
+}

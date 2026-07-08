@@ -1,7 +1,17 @@
-import { Bot, EyeOff, Link, LayoutGrid } from "lucide-react"
+import { Bot, EyeOff, Link, LayoutGrid, Users, DollarSign, MessageSquare, ShieldCheck } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { SectionContainer } from "./section-container"
+
+const AGENTS_LIST = [
+  { label: "Suporte", icon: MessageSquare },
+  { label: "Jurídico", icon: ShieldCheck },
+  { label: "Vendas", icon: Link },
+  { label: "Sistemas", icon: LayoutGrid },
+  { label: "Finanças", icon: DollarSign },
+  { label: "RH", icon: Users },
+  { label: "Atendimento", icon: Bot },
+]
 
 const STEPS = [
   {
@@ -48,25 +58,86 @@ export function ProblemSection() {
     <SectionContainer id="conceito" className="mt-16 md:mt-24 lg:mt-32 mb-0">
       {/* Header */}
       <div className="relative w-full mb-12 md:mb-16">
-        <div className="section-header-content gap-6 mb-8 md:mb-12">
-          <div className="flex gap-3 items-center">
-            <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
-              O conceito
-            </span>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
+          {/* Left Text Block */}
+          <div className="section-header-content gap-6 flex-1 max-w-2xl">
+            <div className="flex gap-3 items-center">
+              <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
+                O conceito
+              </span>
+            </div>
+
+            <div>
+              <h2 className="text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4 leading-[120%]">
+                Usar IA de forma séria é gerenciar{" "}
+                <span className="text-[#FF720A]">muitos agentes</span> — não
+                apenas um.
+              </h2>
+              <p className="text-base md:text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-xl">
+                Toda adoção de IA mais estruturada precisa de uma infraestrutura
+                para administrar os vários agentes que passam a existir na
+                operação. Sem ela, cada agente vira uma ilha, com seu próprio
+                acesso, suas próprias regras e nenhuma visão do conjunto.
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h2 className="text-[32px] md:text-[48px] font-semibold text-neutral-900 dark:text-white tracking-tighter font-manrope mb-4 leading-[120%]">
-              Usar IA de forma séria é gerenciar{" "}
-              <span className="text-[#FF720A]">muitos agentes</span> — não
-              apenas um.
-            </h2>
-            <p className="text-base md:text-[18px] font-medium leading-[180%] tracking-[0.9px] text-neutral-600 dark:text-gray-400 max-w-xl">
-              Toda adoção de IA mais estruturada precisa de uma infraestrutura
-              para administrar os vários agentes que passam a existir na
-              operação. Sem ela, cada agente vira uma ilha, com seu próprio
-              acesso, suas próprias regras e nenhuma visão do conjunto.
-            </p>
+          {/* Right Visual Block (Esteira de Agentes) */}
+          <div className="flex-1 max-w-lg lg:max-w-xl w-full mx-auto lg:mx-0 flex items-center justify-between h-[180px] relative overflow-hidden bg-neutral-50/50 dark:bg-zinc-950/20 rounded-2xl border border-black/5 dark:border-white/5 px-6 shadow-sm">
+            {/* GenAI Hub Emitter (Left) */}
+            <div className="flex flex-col items-center gap-1.5 z-20 bg-neutral-50/50 dark:bg-zinc-950/30 backdrop-blur-sm pr-4 relative">
+              {/* Glow behind Hub */}
+              <div className="absolute inset-0 rounded-full blur-md bg-[#FF720A]/10 dark:bg-[#FF720A]/5 pointer-events-none" />
+              <div className="w-14 h-14 rounded-full bg-neutral-50 dark:bg-zinc-900 border-2 border-[#FF720A]/30 text-[#FF720A] flex items-center justify-center relative">
+                <div className="w-10 h-10 rounded-full border border-dashed border-[#FF720A]/20 flex items-center justify-center bg-white dark:bg-zinc-900 shadow-sm">
+                  <span className="text-[#FF720A] font-bold text-[7px] tracking-wider font-mono">GenAI</span>
+                </div>
+              </div>
+              <span className="font-mono text-[8px] tracking-wider text-[#FF720A] uppercase font-bold">Agentes</span>
+            </div>
+
+            {/* Connecting Line to Treadmill */}
+            <div className="absolute left-[80px] top-1/2 -translate-y-1/2 w-8 h-px border-t border-dashed border-neutral-300 dark:border-zinc-800 z-10" />
+
+            {/* Conveyor Belt / Treadmill (Right) */}
+            <div 
+              className="flex-1 h-full relative z-10 overflow-hidden"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent 0%, black 40px, black 95%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 40px, black 95%, transparent 100%)'
+              }}
+            >
+              <div className="absolute top-1/2 -translate-y-1/2 flex gap-6 animate-conveyor" style={{ width: 'max-content' }}>
+                {/* Set A */}
+                <div className="flex gap-6 shrink-0">
+                  {AGENTS_LIST.map((agent, i) => {
+                    const Icon = agent.icon;
+                    return (
+                      <div key={`a-${i}`} className="flex flex-col items-center gap-1.5 w-16 group">
+                        <div className="w-11 h-11 rounded-xl bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800 shadow-sm flex items-center justify-center text-neutral-400 dark:text-zinc-500 group-hover:border-neutral-400 dark:group-hover:border-zinc-750 group-hover:text-neutral-700 dark:group-hover:text-zinc-300 transition-all duration-300">
+                          <Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+                        </div>
+                        <span className="font-mono text-[8px] tracking-wider text-neutral-400 dark:text-zinc-650 uppercase font-semibold text-center truncate w-full">{agent.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Set B (Duplicate for seamless loop) */}
+                <div className="flex gap-6 shrink-0">
+                  {AGENTS_LIST.map((agent, i) => {
+                    const Icon = agent.icon;
+                    return (
+                      <div key={`b-${i}`} className="flex flex-col items-center gap-1.5 w-16 group">
+                        <div className="w-11 h-11 rounded-xl bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800 shadow-sm flex items-center justify-center text-neutral-400 dark:text-zinc-500 group-hover:border-neutral-400 dark:group-hover:border-zinc-750 group-hover:text-neutral-700 dark:group-hover:text-zinc-300 transition-all duration-300">
+                          <Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+                        </div>
+                        <span className="font-mono text-[8px] tracking-wider text-neutral-400 dark:text-zinc-650 uppercase font-semibold text-center truncate w-full">{agent.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

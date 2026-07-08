@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 
-import heroImage from "@/assets/hero-1-1.svg"
+import heroImage from "@/assets/tela-relatorio-de-uso.png"
 import { useScheduleDemo } from "./schedule-demo-dialog"
 
 export function HeroSection() {
@@ -13,7 +13,7 @@ export function HeroSection() {
     >
       {/* Hero Content — texto à esquerda + preview do app à direita (xl+) */}
       <div className="flex flex-col px-6 lg:px-12 relative z-10 py-16 md:py-20">
-        <div className="w-full max-w-[1400px] mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-12 lg:px-10">
+        <div className="w-full max-w-[1400px] mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between xl:gap-12 lg:pl-10">
           <div className="min-w-0 flex-1 text-left space-y-6 max-w-3xl xl:max-w-2xl">
             <span className="inline-block text-xs font-bold tracking-[0.12em] uppercase text-[#FF720A]">
               mobileX GenAI
@@ -61,39 +61,36 @@ export function HeroSection() {
             partir de xl (≈ desktopDefault da referência, onde o grid vira
             2 colunas).
           */}
-          <div className="relative mx-auto mt-12 w-full max-w-xl shrink-0 md:mt-16 xl:mx-0 xl:mt-0 xl:self-end">
+          <div className="relative mx-auto mt-12 w-full max-w-xl shrink-0 md:mt-16 xl:mx-0 xl:mt-0 xl:self-center xl:max-w-[600px]">
             {/*
-              Efeito atrás da imagem — inspirado na referência (blob desfocado +
-              textura). Brilho difuso nas cores da marca e uma grade sutil, tudo
-              atrás da imagem (que fica em z-10). pointer-events-none para não
-              capturar cliques.
+              Efeito de sombra/brilho no fundo — circular, sem bordas marcadas,
+              com expansão e desfoque suave para uma aparência mais minimalista e fumacenta.
             */}
-            <div aria-hidden="true" className="pointer-events-none absolute -inset-16">
-              {/* Brilho difuso (glow) — laranja + roxo da marca, vazando muito
-                  além da imagem para formar uma aura visível ao redor dela. */}
+            <div aria-hidden="true" className="pointer-events-none absolute -inset-32 z-0">
               <div
-                className="absolute left-1/2 top-1/2 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+                className="absolute inset-0 rounded-full blur-[110px] opacity-40 dark:opacity-30"
                 style={{
                   background:
-                    "radial-gradient(closest-side, rgba(255,114,10,0.45), rgba(255,114,10,0) 72%)",
+                    "radial-gradient(circle, rgba(255,114,10,0.3) 0%, rgba(255,114,10,0) 70%)",
                 }}
               />
               <div
-                className="absolute right-0 top-0 h-[80%] w-[80%] rounded-full blur-3xl"
+                className="absolute inset-8 rounded-full blur-[90px] opacity-35 dark:opacity-25"
                 style={{
                   background:
-                    "radial-gradient(closest-side, rgba(83,41,113,0.42), rgba(83,41,113,0) 72%)",
+                    "radial-gradient(circle, rgba(83,41,113,0.25) 0%, rgba(83,41,113,0) 70%)",
                 }}
               />
-              {/* Textura de grade sutil, esmaecida nas bordas */}
-              <div className="hero-grid-fx absolute inset-0 text-black/15 dark:text-white/15" />
             </div>
 
-            <img
-              src={heroImage}
-              alt="Preview da interface do mobileX GenAI"
-              className="relative z-10 w-full h-auto"
-            />
+            {/* Container com overflow-hidden para cortar a imagem exatamente no limite lateral direito */}
+            <div className="relative w-full overflow-hidden z-10 rounded-2xl border border-black/10 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.15)] xl:rounded-l-2xl xl:rounded-r-none xl:border-r-0 xl:border-l xl:border-y xl:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+              <img
+                src={heroImage}
+                alt="Preview da interface do mobileX GenAI"
+                className="relative z-10 w-full xl:w-[800px] xl:max-w-none h-auto"
+              />
+            </div>
           </div>
         </div>
       </div>
