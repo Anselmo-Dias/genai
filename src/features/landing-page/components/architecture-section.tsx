@@ -85,9 +85,14 @@ export function ArchitectureSection() {
               </div>
             </div>
 
-            {/* Seta de Ida simples (indica envio/acesso de dados) */}
-            <div className="hidden lg:flex absolute right-[-12px] top-1/2 -translate-y-1/2 bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 w-6 h-6 rounded-full items-center justify-center shadow-sm z-30 text-[#FF720A] transition-colors duration-300">
-              <ArrowRight className="w-3.5 h-3.5" />
+            {/* Duas bolhas individuais de seta (Ida e Volta) empilhadas com gap-2 */}
+            <div className="hidden lg:flex absolute -right-[28px] top-1/2 -translate-y-1/2 flex-col gap-1.5 z-30">
+              <div className="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-sm text-[#FF720A] transition-colors duration-300">
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+              <div className="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-sm text-[#FF720A] transition-colors duration-300">
+                <ArrowLeft className="w-3.5 h-3.5" />
+              </div>
             </div>
           </div>
 
@@ -118,9 +123,14 @@ export function ArchitectureSection() {
               </div>
             </div>
 
-            {/* Seta de Volta simples (indica retorno/dados do GenAI) */}
-            <div className="hidden lg:flex absolute right-[-12px] top-1/2 -translate-y-1/2 bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 w-6 h-6 rounded-full items-center justify-center shadow-sm z-30 text-[#FF720A] transition-colors duration-300">
-              <ArrowLeft className="w-3.5 h-3.5" />
+            {/* Duas bolhas individuais de seta (Ida e Volta) empilhadas com gap-2 */}
+            <div className="hidden lg:flex absolute -right-[28px] top-1/2 -translate-y-1/2 flex-col gap-1.5 z-30">
+              <div className="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-sm text-[#FF720A] transition-colors duration-300">
+                <ArrowRight className="w-3.5 h-3.5" />
+              </div>
+              <div className="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-sm text-[#FF720A] transition-colors duration-300">
+                <ArrowLeft className="w-3.5 h-3.5" />
+              </div>
             </div>
           </div>
 
