@@ -1,4 +1,5 @@
 import type { FC } from "react"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import "../landing-page.css"
 import { Navbar } from "../components/navbar"
@@ -17,8 +18,11 @@ import { Footer } from "../components/footer"
 import { ScheduleDemoProvider } from "../components/schedule-demo-dialog"
 // import { ChatLauncher } from "@/features/chat/components/chat-launcher"
 
+const queryClient = new QueryClient()
+
 export const LandingPage: FC = () => {
   return (
+    <QueryClientProvider client={queryClient}>
     <ScheduleDemoProvider>
     <div className="text-neutral-300 min-h-screen flex flex-col overflow-x-hidden selection:bg-[#F97316] selection:text-black relative">
       <Navbar />
@@ -42,6 +46,7 @@ export const LandingPage: FC = () => {
       {/* <ChatLauncher /> */}
     </div>
     </ScheduleDemoProvider>
+    </QueryClientProvider>
   )
 };
 

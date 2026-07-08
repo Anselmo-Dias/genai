@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { CheckCircle2, Loader2 } from "lucide-react"
 
+import { useLeadsCreate } from "../queries/use-leads-create"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -92,6 +94,7 @@ function ScheduleDemoDialog({
   onOpenChange: (open: boolean) => void
 }) {
   const [submitted, setSubmitted] = useState(false)
+  const leadsCreate = useLeadsCreate()
 
   const {
     register,
@@ -113,10 +116,7 @@ function ScheduleDemoDialog({
   })
 
   const onSubmit = async (values: ScheduleDemoValues) => {
-    // TODO: integrar com a rota de agendamento (service + mutation) quando o
-    // endpoint estiver disponível. Por ora apenas simula o envio.
-    await new Promise((resolve) => setTimeout(resolve, 800))
-    console.log("[agendar-demo] solicitação:", values)
+    await leadsCreate.mutateAsync(values)
     setSubmitted(true)
   }
 

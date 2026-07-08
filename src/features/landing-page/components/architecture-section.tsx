@@ -1,4 +1,4 @@
-import { Bot, Cpu, Plug, Network, ShieldCheck } from "lucide-react"
+import { Bot, Cpu, Plug, Network, ShieldCheck, ArrowRight, ArrowLeft } from "lucide-react"
 
 import { SectionContainer } from "./section-container"
 
@@ -54,12 +54,12 @@ export function ArchitectureSection() {
 
       {/* Main Grid: Left Panel (Component lists) & Right Panel (Orbit Hub Diagram) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-        
+
         {/* Left Panel: lists (col-span-5) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           
           {/* Consumers Group */}
-          <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-zinc-900/10 p-6 flex flex-col justify-between shadow-sm">
+          <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-zinc-900/10 p-6 flex flex-col justify-between shadow-sm relative">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.1em] text-neutral-400">
                 Quem usa os agentes
@@ -84,10 +84,15 @@ export function ArchitectureSection() {
                 ))}
               </div>
             </div>
+
+            {/* Seta de Ida simples (indica envio/acesso de dados) */}
+            <div className="hidden lg:flex absolute right-[-12px] top-1/2 -translate-y-1/2 bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 w-6 h-6 rounded-full items-center justify-center shadow-sm z-30 text-[#FF720A] transition-colors duration-300">
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
           {/* Tools Group */}
-          <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-zinc-900/10 p-6 flex flex-col justify-between shadow-sm">
+          <div className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-zinc-900/10 p-6 flex flex-col justify-between shadow-sm relative">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.1em] text-neutral-400">
                 Ferramentas, dados e serviços
@@ -111,6 +116,11 @@ export function ArchitectureSection() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Seta de Volta simples (indica retorno/dados do GenAI) */}
+            <div className="hidden lg:flex absolute right-[-12px] top-1/2 -translate-y-1/2 bg-white dark:bg-zinc-900 border border-black/10 dark:border-white/10 w-6 h-6 rounded-full items-center justify-center shadow-sm z-30 text-[#FF720A] transition-colors duration-300">
+              <ArrowLeft className="w-3.5 h-3.5" />
             </div>
           </div>
 
