@@ -60,7 +60,7 @@ export function ProblemSection() {
       <div className="relative w-full mb-12 md:mb-16">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
           {/* Left Text Block */}
-          <div className="section-header-content gap-6 flex-1 max-w-2xl">
+          <div className="section-header-content gap-6 lg:flex-1 max-w-2xl">
             <div className="flex gap-3 items-center">
               <span className="uppercase text-sm font-medium text-[#FF720A] tracking-widest">
                 O conceito
@@ -83,7 +83,12 @@ export function ProblemSection() {
           </div>
 
           {/* Right Visual Block (Esteira de Agentes) */}
-          <div className="flex-1 max-w-lg lg:max-w-xl w-full mx-auto lg:mx-0 flex items-center justify-between h-[180px] relative overflow-hidden bg-neutral-50/50 dark:bg-zinc-950/20 rounded-2xl border border-black/5 dark:border-white/5 px-6 shadow-sm">
+          {/*
+            `lg:flex-1` (e não `flex-1`): o wrapper acima é `flex-col` no mobile,
+            onde `flex-basis: 0%` sobrescreveria o `h-[180px]` e zeraria a altura
+            da esteira (`h-full`), escondendo os agentes.
+          */}
+          <div className="lg:flex-1 max-w-lg lg:max-w-xl w-full mx-auto lg:mx-0 flex items-center justify-between h-[180px] relative overflow-hidden bg-neutral-50/50 dark:bg-zinc-950/20 rounded-2xl border border-black/5 dark:border-white/5 px-4 sm:px-6 shadow-sm">
             {/* GenAI Hub Emitter (Left) */}
             <div className="flex flex-col items-center gap-1.5 z-20 bg-neutral-50/50 dark:bg-zinc-950/30 backdrop-blur-sm pr-4 relative">
               {/* Glow behind Hub */}
