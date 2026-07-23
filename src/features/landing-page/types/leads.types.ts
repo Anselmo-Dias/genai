@@ -6,6 +6,7 @@ export type LeadsCreateRequest = {
   cargo?: string
   porte?: string
   mensagem?: string
+  recaptchaToken: string
 }
 
 export type LeadsCreateResponse = {

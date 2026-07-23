@@ -6,7 +6,10 @@ import { CheckCircle2, Loader2 } from "lucide-react"
 
 import { useLeadsCreate } from "../queries/use-leads-create"
 
+import { useRecaptchaEnterprise } from "@/hooks/use-recaptcha-enterprise"
+
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogClose,
@@ -40,6 +43,11 @@ const scheduleDemoSchema = z.object({
   cargo: z.string().trim().optional(),
   porte: z.string().optional(),
   mensagem: z.string().trim().max(500, "Máximo de 500 caracteres.").optional(),
+  consentimento: z.boolean().refine((value) => value === true, {
+    message: "É necessário aceitar o tratamento dos dados.",
+  }),
+  // Honeypot: campo escondido que só bot preenche. Não é enviado à API.
+  site: z.string().optional(),
 })
 
 type ScheduleDemoValues = z.infer<typeof scheduleDemoSchema>
@@ -94,7 +102,9 @@ function ScheduleDemoDialog({
   onOpenChange: (open: boolean) => void
 }) {
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const leadsCreate = useLeadsCreate()
+  const { executeRecaptcha } = useRecaptchaEnterprise()
 
   const {
     register,
@@ -112,12 +122,34 @@ function ScheduleDemoDialog({
       cargo: "",
       porte: "",
       mensagem: "",
+      consentimento: false,
+      site: "",
     },
   })
 
   const onSubmit = async (values: ScheduleDemoValues) => {
-    await leadsCreate.mutateAsync(values)
-    setSubmitted(true)
+    // Honeypot: se o campo escondido veio preenchido, é bot. Finge sucesso e
+    // descarta — sem tocar na API, sem gerar lead.
+    if (values.site) {
+      setSubmitted(true)
+      return
+    }
+
+    setSubmitError(null)
+    try {
+      const recaptchaToken = await executeRecaptcha("submit_lead")
+      const {
+        consentimento: _consentimento,
+        site: _site,
+        ...lead
+      } = values
+      await leadsCreate.mutateAsync({ ...lead, recaptchaToken })
+      setSubmitted(true)
+    } catch {
+      setSubmitError(
+        "Não foi possível enviar sua solicitação. Tente novamente em instantes.",
+      )
+    }
   }
 
   const handleOpenChange = (next: boolean) => {
@@ -126,6 +158,7 @@ function ScheduleDemoDialog({
       // Restaura o formulário após a animação de fechamento.
       setTimeout(() => {
         setSubmitted(false)
+        setSubmitError(null)
         reset()
       }, 200)
     }
@@ -161,6 +194,21 @@ function ScheduleDemoDialog({
             </DialogHeader>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Honeypot: invisível ao usuário, só bot preenche. */}
+              <div
+                aria-hidden="true"
+                className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+              >
+                <label htmlFor="site">Não preencha este campo</label>
+                <input
+                  id="site"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("site")}
+                />
+              </div>
+
               <Field id="nome" label="Nome completo" required error={errors.nome?.message}>
                 <Input id="nome" placeholder="Seu nome" {...register("nome")} />
               </Field>
@@ -255,6 +303,77 @@ function ScheduleDemoDialog({
                   {...register("mensagem")}
                 />
               </Field>
+
+              <div className="space-y-3 rounded-md border border-border bg-muted/30 p-4">
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Com base no seu consentimento, os dados informados serão
+                  usados exclusivamente para que nossa equipe comercial entre em
+                  contato e agende sua demonstração do mobileX GenAI. O acesso é
+                  restrito ao time comercial e registrado.
+                </p>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Controlador:{" "}
+                  <strong className="font-medium text-foreground">
+                    MTM Serviços de Informática LTDA
+                  </strong>{" "}
+                  (CNPJ 07.622.836/0001-77). Encarregado (DPO): Ramilton Silva —{" "}
+                  <a
+                    href="mailto:dpo@mtmtecnologia.com.br"
+                    className="text-[#FF720A] underline underline-offset-2"
+                  >
+                    dpo@mtmtecnologia.com.br
+                  </a>
+                  .
+                </p>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Guardamos seus dados enquanto houver relacionamento comercial
+                  e por até 24 meses após o último contato, salvo obrigação
+                  legal de guarda. Consulte a{" "}
+                  <a
+                    href="https://mobilecare.blob.core.windows.net/politica/termos_mobilex.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#FF720A] underline underline-offset-2"
+                  >
+                    Política de Privacidade
+                  </a>
+                  .
+                </p>
+
+                <Controller
+                  control={control}
+                  name="consentimento"
+                  render={({ field }) => (
+                    <div className="flex items-start gap-2">
+                      <Checkbox
+                        id="consentimento"
+                        checked={field.value}
+                        onCheckedChange={(checked) =>
+                          field.onChange(checked === true)
+                        }
+                        className="mt-0.5"
+                      />
+                      <Label
+                        htmlFor="consentimento"
+                        className="text-xs leading-relaxed font-normal text-muted-foreground"
+                      >
+                        Li e concordo com o tratamento dos meus dados para esta
+                        finalidade, conforme a LGPD.
+                        <span className="text-[#FF720A]"> *</span>
+                      </Label>
+                    </div>
+                  )}
+                />
+                {errors.consentimento && (
+                  <p className="text-xs text-destructive">
+                    {errors.consentimento.message}
+                  </p>
+                )}
+              </div>
+
+              {submitError && (
+                <p className="text-xs text-destructive">{submitError}</p>
+              )}
 
               <DialogFooter className="gap-2 sm:gap-2">
                 <DialogClose asChild>

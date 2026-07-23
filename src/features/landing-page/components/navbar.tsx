@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react"
 import { Menu, X } from "lucide-react"
 
 import { useScheduleDemo } from "./schedule-demo-dialog"
+import { PLATFORM_URL } from "../constants"
 
 // Apenas os links essenciais da narrativa (o que é → como funciona → o que
 // oferece). Os subtemas (identidade, integração, casos de uso) continuam
@@ -65,14 +66,22 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* CTA (direita, desktop) */}
-        <button
-          type="button"
-          onClick={openScheduleDemo}
-          className="hidden md:inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200"
-        >
-          Agendar demonstração
-        </button>
+        {/* CTAs (direita, desktop) */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href={PLATFORM_URL}
+            className="inline-flex items-center border border-black/15 dark:border-white/15 text-neutral-700 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 font-medium text-xs px-4 py-2 rounded-full transition-colors duration-200"
+          >
+            Acessar plataforma
+          </a>
+          <button
+            type="button"
+            onClick={openScheduleDemo}
+            className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-xs px-4 py-2 rounded-full transition-colors duration-200"
+          >
+            Agendar demonstração
+          </button>
+        </div>
 
         {/* Mobile: hambúrguer */}
         <div className="flex md:hidden items-center gap-3">
@@ -113,17 +122,24 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <div className="pt-3 pb-1">
+              <div className="pt-3 pb-1 flex flex-col gap-2">
                 <button
                   type="button"
                   onClick={() => {
                     setIsMenuOpen(false)
                     openScheduleDemo()
                   }}
-                  className="inline-flex items-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-sm px-5 py-3 rounded-full transition-colors duration-200"
+                  className="inline-flex items-center justify-center bg-[#FF720A] hover:bg-[#e0620a] text-white font-bold text-sm px-5 py-3 rounded-full transition-colors duration-200"
                 >
                   Agendar demonstração
                 </button>
+                <a
+                  href={PLATFORM_URL}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="inline-flex items-center justify-center border border-black/15 dark:border-white/15 text-neutral-700 dark:text-neutral-300 hover:text-[#F97316] hover:border-[#F97316]/50 font-medium text-sm px-5 py-3 rounded-full transition-colors duration-200"
+                >
+                  Acessar plataforma
+                </a>
               </div>
             </div>
           </motion.div>

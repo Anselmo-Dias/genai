@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 import heroImage from "@/assets/tela-relatorio-de-uso.png"
 import { useScheduleDemo } from "./schedule-demo-dialog"
+import { PLATFORM_URL } from "../constants"
 
 export function HeroSection() {
   const { open: openScheduleDemo } = useScheduleDemo()
@@ -46,7 +47,7 @@ export function HeroSection() {
                 <ArrowRight className="h-4 w-4" />
               </button>
               <a
-                href="https://genai.mobilex.tech/"
+                href={PLATFORM_URL}
                 className="inline-flex w-full items-center justify-center gap-2 border border-black/20 hover:border-black/40 text-neutral-900 dark:border-white/30 dark:hover:border-white/60 dark:text-white font-semibold text-sm px-5 py-3 rounded-full transition-colors duration-200 backdrop-blur-sm md:w-fit"
               >
                 Acessar plataforma
